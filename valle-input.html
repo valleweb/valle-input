@@ -6,36 +6,33 @@
     <style>
 
       :host {
-        display: block;
-      }
-
-      h1 {
-        @apply (--vsc-element-text);
-        color: var(--vsc-element-text-color, #f44277);
+        display: inline-block;
       }
 
     </style>
 
-    <h1>Hello [[prop1]]!</h1>
+    <label for="input">[[label]]</label>
+    <input id="input" type="text" placeholder=[[placeholder]]>
 
   </template>
 
   <script>
-    class vscElement extends Polymer.Element {
+    class valleInput extends Polymer.Element {
 
       static get is() { return 'valle-input'; }
 
       static get properties() {
         return {
-          prop1: {
+          label: {
             type: String,
-            value: 'World'
-          }
+            value: 'Label'
+          },
+          placeholder: String
         };
       }
 
     }
 
-    window.customElements.define(vscElement.is, vscElement);
+    window.customElements.define(valleInput.is, valleInput);
   </script>
 </dom-module>
