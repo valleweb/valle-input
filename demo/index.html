@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+    <title>valle-input demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../valle-input.html">
+  </head>
+
+  <body>
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        .vertical-section-container {
+          max-width: 500px;
+        }
+      </style>
+    </custom-style>
+
+    <main class="vertical-section-container centered">
+      <h1>valle-input demo</h1>
+
+      <!-- Default - demo
+      ========================= -->
+
+      <h2>Default</h2>
+
+      <demo-snippet class="centered-demo">
+        <template>
+
+          <valle-input></valle-input>
+
+        </template>
+      </demo-snippet>
+
+      <!-- With Prop - demo
+      ========================= -->
+
+      <h2>With Prop</h2>
+
+      <demo-snippet class="centered-demo">
+        <template>
+
+          <valle-input prop1="Human"></valle-input>
+
+        </template>
+      </demo-snippet>
+
+      <!-- Custom style - demo
+      ========================= -->
+
+      <h2>Custom style</h2>
+
+      <demo-snippet class="centered-demo">
+        <template>
+
+        <style is="custom-style">
+          .shiny {
+            --vsc-element-text-color: #a1f442;
+          }
+        </style>
+
+          <valle-input class="shiny"></valle-input>
+
+        </template>
+      </demo-snippet>
+
+    </main>
+
+  </body>
+</html>

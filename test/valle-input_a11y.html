@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>valle-input a11y test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../polymer/polymer.html">
+    <link rel="import" href="../valle-input.html">
+  </head>
+  <body>
+
+    <test-fixture id="basicTestFixture">
+      <template>
+        <valle-input></valle-input>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('valle-input', () => {
+
+        let basicElement;
+
+        setup(() => {
+          basicElement = fixture('basicTestFixture');
+        });
+
+        test('a11y', () => {
+          // You awesome test rules
+        });
+
+        a11ySuite('basicTestFixture');
+
+      });
+    </script>
+
+  </body>
+</html>

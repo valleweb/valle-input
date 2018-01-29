@@ -1,0 +1,41 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="valle-input">
+  <template>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      h1 {
+        @apply (--vsc-element-text);
+        color: var(--vsc-element-text-color, #f44277);
+      }
+
+    </style>
+
+    <h1>Hello [[prop1]]!</h1>
+
+  </template>
+
+  <script>
+    class vscElement extends Polymer.Element {
+
+      static get is() { return 'valle-input'; }
+
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'World'
+          }
+        };
+      }
+
+    }
+
+    window.customElements.define(vscElement.is, vscElement);
+  </script>
+</dom-module>
