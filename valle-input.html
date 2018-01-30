@@ -7,12 +7,36 @@
 
       :host {
         display: inline-block;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .visual-hidden {
+        position: absolute;
+        left: -10000px;
       }
 
     </style>
 
     <label for="input">[[label]]</label>
-    <input id="input" type="text" placeholder=[[placeholder]]>
+
+    <input
+      id="input"
+      type="text"
+      placeholder=[[placeholder]]
+      aria-describedby="description"
+    >
+
+    <template is="dom-if" if={{_isNoError(helptext,error)}}>
+      <span id="description">[[helptext]]</span>
+    </template>
+
+    <template is="dom-if" if=[[error]]>
+      <span role="alert" id="description">
+        [[errortext]]
+        <span class="visual-hidden">: [[helptext]]</span>
+      </span>
+    </template>
 
   </template>
 
@@ -21,16 +45,47 @@
 
       static get is() { return 'valle-input'; }
 
-      static get properties() {
-        return {
-          label: {
-            type: String,
-            value: 'Label'
-          },
-          placeholder: String
-        };
+      _isNoError(helptext, error) {
+        return helptext && !error;
       }
 
+      _toogleRequired(required) {
+        required
+        ? this.$.input.setAttribute('aria-required', true)
+        : this.$.input.removeAttribute('aria-required')
+      }
+
+      _toogleDisabled(disabled) {
+        disabled
+        ? this.$.input.setAttribute('disabled', true)
+        : this.$.input.removeAttribute('disabled')
+      }
+
+      static get properties() {
+        return {
+          label: String,
+          placeholder: String,
+          helptext: String,
+          errortext: String,
+          error: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+          },
+          required: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true,
+            observer: '_toogleRequired'
+          },
+          disabled: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true,
+            observer: '_toogleDisabled'
+          }
+        };
+      }
     }
 
     window.customElements.define(valleInput.is, valleInput);
