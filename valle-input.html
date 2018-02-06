@@ -18,23 +18,24 @@
 
     </style>
 
-    <label for="input">[[label]]</label>
+    <label id="inputLabel">[[label]]</label>
 
     <input
       id="input"
       type="text"
       placeholder=[[placeholder]]
+      aria-labelledby="inputLabel"
       aria-describedby="description"
     >
 
-    <template is="dom-if" if={{_isNoError(helptext,error)}}>
-      <span id="description">[[helptext]]</span>
+    <template is="dom-if" if={{_isNoError(helpertext,error)}}>
+      <span id="description">[[helpertext]]</span>
     </template>
 
     <template is="dom-if" if=[[error]]>
       <span role="alert" id="description">
         [[errortext]]
-        <span class="visual-hidden">: [[helptext]]</span>
+        <span class="visual-hidden">: [[helpertext]]</span>
       </span>
     </template>
 
@@ -45,8 +46,8 @@
 
       static get is() { return 'valle-input'; }
 
-      _isNoError(helptext, error) {
-        return helptext && !error;
+      _isNoError(helpertext, error) {
+        return helpertext && !error;
       }
 
       _toogleRequired(required) {
@@ -65,7 +66,7 @@
         return {
           label: String,
           placeholder: String,
-          helptext: String,
+          helpertext: String,
           errortext: String,
           error: {
             type: Boolean,
