@@ -20,21 +20,39 @@
       </template>
     </test-fixture>
 
-    <test-fixture id="helpDescription">
+    <test-fixture id="helperText">
       <template>
         <valle-input label="Label test" helpertext="Full name"></valle-input>
       </template>
     </test-fixture>
 
-    <test-fixture id="errorDescription">
+    <test-fixture id="helperTextAndError">
+      <template>
+        <valle-input label="Label test" helpertext="Full name" error></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="errorText">
+      <template>
+        <valle-input label="Label test" errortext="Invalid name"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="errorTextAndError">
       <template>
         <valle-input label="Label test" errortext="Invalid name" error></valle-input>
       </template>
     </test-fixture>
 
-    <test-fixture id="error">
+    <test-fixture id="helperTextErrorAndErrorText">
       <template>
         <valle-input label="Label test" helpertext="Full name" errortext="Invalid name" error></valle-input>
+      </template>
+    </test-fixture>
+    
+    <test-fixture id="disabled">
+      <template>
+        <valle-input label="Label test" disabled></valle-input>
       </template>
     </test-fixture>
 
@@ -44,61 +62,19 @@
       </template>
     </test-fixture>
 
-    <test-fixture id="disabled">
-      <template>
-        <valle-input label="Label test" disabled></valle-input>
-      </template>
-    </test-fixture>
-
-    <test-fixture id="helpDescriptionRequired">
-      <template>
-        <valle-input label="Label test" helpertext="Full name" required></valle-input>
-      </template>
-    </test-fixture>
-
-    <test-fixture id="requiredError">
-      <template>
-        <valle-input label="Label test" helpertext="Full name" errortext="Invalid name" error required></valle-input>
-      </template>
-    </test-fixture>
-
     <test-fixture id="requiredDisabled">
       <template>
         <valle-input label="Label test" helpertext="Full name" required disabled></valle-input>
       </template>
     </test-fixture>
 
-    <test-fixture id="requiredErrorDisabled">
-      <template>
-        <valle-input label="Label test" helpertext="Full name" errortext="Invalid name" error required disabled></valle-input>
-      </template>
-    </test-fixture>
-
     <script>
-      suite('valle-input', () => {
+      suite('valle-input - default', () => {
 
         let inputDefault;
-        let inputHelpDescription;
-        let inputErrorDescription;
-        let inputError;
-        let inputRequired;
-        let inputDisabled;
-        let inputHelpDescriptionRequired;
-        let inputRequiredError;
-        let inputRequiredDisabled;
-        let inputRequiredErrorDisabled;
 
         setup(() => {
           inputDefault = fixture('default');
-          inputHelpDescription = fixture('helpDescription');
-          inputErrorDescription = fixture('errorDescription');
-          inputError = fixture('error');
-          inputRequired = fixture('required');
-          inputDisabled = fixture('disabled');
-          inputHelpDescriptionRequired = fixture('helpDescriptionRequired');
-          inputRequiredError = fixture('requiredError');
-          inputRequiredDisabled = fixture('requiredDisabled');
-          inputRequiredErrorDisabled = fixture('requiredErrorDisabled');
         });
 
         test('Should render a basic input', () => {
@@ -111,67 +87,149 @@
 
           assert.equal(input.nodeName, 'INPUT');
           assert.equal(label.nodeName, 'LABEL');
+
+          assert.equal(input.value, '');
+
           assert.equal(label.textContent, 'Label test');
+          assert.equal(label.id, 'inputLabel');
+
+          assert.isTrue(input.hasAttribute('aria-labelledby'));
+          assert.equal(input.getAttribute('aria-labelledby'), label.id);
+
+          assert.isTrue(input.hasAttribute('aria-describedby'));
+          assert.equal(input.getAttribute('aria-describedby'), 'description');
+
           assert.equal(display, 'inline-block');
           assert.isTrue(noDescriptions);
         });
+      });
 
-        test('Should render a input with a help description', (done) => {
+      suite('valle-input - with helper text', () => {
 
+        let inputHelperText,
+            inputHelperTextAndError;
+
+        setup(() => {
+          inputHelperText = fixture('helperText');
+          inputHelperTextAndError = fixture('helperTextAndError');
+        });
+
+        test('Should render a input with a helper text and no error', (done) => {
           flush(() => {
-            const input = inputHelpDescription.shadowRoot.querySelector('input');
-            const describedby = input.getAttribute('aria-describedby');
-            const descriptions = inputHelpDescription.shadowRoot.querySelectorAll('span');
-            const helpDescriptionText = descriptions[0].textContent;
 
-            const hasDescription = descriptions.length === 1;
+            const helperText = inputHelperText.shadowRoot.querySelector('small');
+            const errorText = inputHelperText.shadowRoot.querySelector('span');
 
-            assert.isTrue(input.hasAttribute('aria-describedby'));
-            assert.equal(describedby, descriptions[0].id);
-            assert.isTrue(hasDescription);
-            assert.equal(helpDescriptionText, 'Full name');
+            assert.equal(helperText.nodeName, 'SMALL');
+            assert.equal(helperText.textContent, 'Full name');
+
+            assert.equal(errorText, null);
+
+            done();
+          });
+        });
+
+        test('Should render a input with a helper text and error', (done) => {
+          flush(() => {
+
+            const helperText = inputHelperTextAndError.shadowRoot.querySelector('small');
+            const helperTextStyle = window.getComputedStyle(helperText, null);
+            const inputStyle = window.getComputedStyle(inputHelperTextAndError, null);
+
+            assert.equal(helperText.nodeName, 'SMALL');
+            assert.equal(helperText.textContent, ': Full name');
+
+            assert.equal(inputStyle.getPropertyValue('position'), 'relative');
+            assert.equal(inputStyle.getPropertyValue('overflow'), 'hidden');
+
+            assert.equal(helperTextStyle.getPropertyValue('position'), 'absolute');
+            assert.equal(helperTextStyle.getPropertyValue('left'), '-10000px');
 
             done();
           })
         })
+        
+      });
 
-        test('Should render a input with a error description', (done) => {
+      suite('valle-input - with error text and error', () => {
 
+        const removeSpecialCharacter = string => string.replace(/\n/g, '');
+
+        let inputErrorAndErrorText,
+            inputHelperTextErrorAndErrorText,
+            inputErrorText;
+        
+        setup(() => {
+          inputErrorAndErrorText = fixture('errorTextAndError');
+          inputHelperTextErrorAndErrorText = fixture('helperTextErrorAndErrorText');
+          inputErrorText = fixture('errorText');
+        });
+
+        test('Should render a input with error and error text', (done) => {
           flush(() => {
-            const descriptions = inputErrorDescription.shadowRoot.querySelectorAll('span');
-            const errorDescriptionText = descriptions[0].innerText;
 
-            const hasError = descriptions.length === 2;
+            const errorText = inputErrorAndErrorText.shadowRoot.querySelector('span');
+            const helperText = inputErrorAndErrorText.shadowRoot.querySelector('small');
 
-            assert.isTrue(hasError);
-            assert.equal(errorDescriptionText, 'Invalid name :')
+            assert.equal(errorText.nodeName, 'SPAN');
+            assert.equal(removeSpecialCharacter(errorText.innerText), 'Invalid name:');
+            assert.isTrue(errorText.hasAttribute('role'));
+            assert.equal(errorText.getAttribute('role'), 'alert');
+
+            assert.equal(helperText.nodeName, 'SMALL');
+            assert.equal(helperText.textContent, ': ');
+            done();
+          });
+        });
+
+        test('Should render a input with error, error text and helper text only visible for screen reader', (done) => {
+          flush(() => {
+
+            const errorText = inputHelperTextErrorAndErrorText.shadowRoot.querySelector('span');
+            const helperText = inputHelperTextErrorAndErrorText.shadowRoot.querySelector('small');
+            const helperTextStyle = window.getComputedStyle(helperText, null);
+            const inputStyle = window.getComputedStyle(inputHelperTextErrorAndErrorText, null);
+
+            assert.equal(removeSpecialCharacter(errorText.innerText), 'Invalid name: Full name');
+
+            assert.equal(helperText.nodeName, 'SMALL');
+            assert.equal(helperText.innerText, ': Full name');
+
+            assert.equal(helperTextStyle.getPropertyValue('position'), 'absolute');
+            assert.equal(helperTextStyle.getPropertyValue('left'), '-10000px');
+
+            assert.equal(inputStyle.getPropertyValue('position'), 'relative');
+            assert.equal(inputStyle.getPropertyValue('overflow'), 'hidden');
 
             done();
-          })
-        })
+          });
+        });
 
-        test('Should render a input with a error description, help description and error', (done) => {
-
+        test('Only should render a input with error text if error exist', (done) => {
           flush(() => {
-            const descriptions = inputError.shadowRoot.querySelectorAll('span');
-            const errorDescriptionText = descriptions[0].innerText;
+            const errorText = inputErrorText.shadowRoot.querySelector('span');
 
-            const hasError = descriptions.length === 2;
+            assert.equal(errorText, null);
 
-            assert.isTrue(hasError);
-            assert.equal(errorDescriptionText, 'Invalid name : Full name');
+            inputErrorText.error = true;
 
-            done();
-          })
-        })
+            flush(() => {
+              const errorTextWithError = inputErrorText.shadowRoot.querySelector('span');
 
-        test('Should render a required input', () => {
-          const input = inputRequired.shadowRoot.querySelector('input');
-          const requiredInput = input.getAttribute('aria-required');
+              assert.equal(errorTextWithError.nodeName, 'SPAN');
+              assert.equal(removeSpecialCharacter(errorTextWithError.innerText), 'Invalid name:');
+              done();
+            });
+          });
+        });
+      });
 
-          assert.isTrue(input.hasAttribute('aria-required'));
-          assert.equal(requiredInput, 'true');
-        })
+      suite('valle-input - disabled', () => {
+        let inputDisabled;
+
+        setup(() => {
+          inputDisabled = fixture('disabled');
+        });
 
         test('Should render a disabled input', () => {
           const input = inputDisabled.shadowRoot.querySelector('input');
@@ -179,102 +237,49 @@
 
           assert.isTrue(input.hasAttribute('disabled'));
           assert.equal(disabledInput, 'true');
-        })
-
-        test('Should render a input with help description and required', (done) => {
-          
-          flush(() => {
-            const descriptions = inputHelpDescriptionRequired.shadowRoot.querySelectorAll('span');
-            const helpDescriptionText = descriptions[0].textContent;
-            const input = inputHelpDescriptionRequired.shadowRoot.querySelector('input');
-            const requiredInput = input.getAttribute('aria-required');
-
-            const hasDescription = descriptions.length === 1;
-
-            assert.isTrue(hasDescription);
-            assert.equal(helpDescriptionText, 'Full name');
-            assert.isTrue(input.hasAttribute('aria-required'));
-            assert.equal(requiredInput, 'true');
-
-            done();
-          })
-        })
-
-        test('Should render a input with help description, error and required', (done) => {
-          
-          flush(() => {
-            const descriptions = inputRequiredError.shadowRoot.querySelectorAll('span');
-            const errorDescriptionText = descriptions[0].innerText;
-            const input = inputRequiredError.shadowRoot.querySelector('input');
-            const requiredInput = input.getAttribute('aria-required');
-
-            const hasError = descriptions.length === 2;
-
-            assert.isTrue(hasError);
-            assert.equal(errorDescriptionText, 'Invalid name : Full name');
-            assert.isTrue(input.hasAttribute('aria-required'));
-            assert.equal(requiredInput, 'true');
-
-            done();
-          })
-        })
-
-        test('Should render a input with help description, required and disabled', (done) => {
-          
-          flush(() => {
-            const descriptions = inputRequiredDisabled.shadowRoot.querySelectorAll('span');
-            const helpDescriptionText = descriptions[0].textContent;
-            const input = inputRequiredDisabled.shadowRoot.querySelector('input');
-            const requiredInput = input.getAttribute('aria-required');
-            const disabledInput = input.getAttribute('disabled');
-
-            const hasDescription = descriptions.length === 1;
-
-            assert.isTrue(hasDescription);
-            assert.equal(helpDescriptionText, 'Full name');
-            assert.isTrue(input.hasAttribute('aria-required'));
-            assert.equal(requiredInput, 'true');
-            assert.isTrue(input.hasAttribute('disabled'));
-            assert.equal(disabledInput, 'true');
-
-            done();
-          })
-        })
-
-        test('Should render a input with help description, error, required and disabled', (done) => {
-          
-          flush(() => {
-            const descriptions = inputRequiredErrorDisabled.shadowRoot.querySelectorAll('span');
-            const errorDescriptionText = descriptions[0].innerText;
-            const input = inputRequiredErrorDisabled.shadowRoot.querySelector('input');
-            const requiredInput = input.getAttribute('aria-required');
-            const disabledInput = input.getAttribute('disabled');
-
-            const hasError = descriptions.length === 2;
-
-            assert.isTrue(hasError);
-            assert.equal(errorDescriptionText, 'Invalid name : Full name');
-            assert.isTrue(input.hasAttribute('aria-required'));
-            assert.equal(requiredInput, 'true');
-            assert.isTrue(input.hasAttribute('disabled'));
-            assert.equal(disabledInput, 'true');
-
-            done();
-          })
-        })
-
-        a11ySuite('default', ['badAriaAttributeValue']);
-        a11ySuite('helpDescription', ['badAriaAttributeValue']);
-        a11ySuite('errorDescription', ['badAriaAttributeValue']);
-        a11ySuite('error', ['badAriaAttributeValue']);
-        a11ySuite('required', ['badAriaAttributeValue']);
-        a11ySuite('disabled', ['badAriaAttributeValue']);
-        a11ySuite('helpDescriptionRequired', ['badAriaAttributeValue']);
-        a11ySuite('requiredError', ['badAriaAttributeValue']);
-        a11ySuite('requiredDisabled', ['badAriaAttributeValue']);
-        a11ySuite('requiredErrorDisabled', ['badAriaAttributeValue']);
-
+        });
       });
+
+      suite('valle-input - required', () => {
+        let inputRequired,
+            inputRequiredAndDisabled;
+
+        setup(() => {
+          inputRequired = fixture('required');
+          inputRequiredAndDisabled = fixture('requiredDisabled');
+        });
+
+        test('Should render a required input', () => {
+          const input = inputRequired.shadowRoot.querySelector('input');
+          const requiredInput = input.getAttribute('aria-required');
+
+          assert.isTrue(input.hasAttribute('aria-required'));
+          assert.equal(requiredInput, 'true');
+        });
+
+        test('Should render a required input disabled', () => {
+          const input = inputRequiredAndDisabled.shadowRoot.querySelector('input');
+          const requiredInput = input.getAttribute('aria-required');
+          const disabledInput = input.getAttribute('disabled');
+
+          assert.isTrue(input.hasAttribute('aria-required'));
+          assert.equal(requiredInput, 'true');
+
+          assert.isTrue(input.hasAttribute('disabled'));
+          assert.equal(disabledInput, 'true');
+        });
+      });
+
+      a11ySuite('default', ['badAriaAttributeValue']);
+      a11ySuite('helperText', ['badAriaAttributeValue']);
+      a11ySuite('helperTextAndError', ['badAriaAttributeValue']);
+      a11ySuite('errorText', ['badAriaAttributeValue']);
+      a11ySuite('errorTextAndError', ['badAriaAttributeValue']);
+      a11ySuite('helperTextErrorAndErrorText', ['badAriaAttributeValue']);
+      a11ySuite('disabled', ['badAriaAttributeValue']);
+      a11ySuite('required', ['badAriaAttributeValue']);
+      a11ySuite('requiredDisabled', ['badAriaAttributeValue']);
+      
     </script>
 
   </body>
