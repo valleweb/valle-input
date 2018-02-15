@@ -49,9 +49,13 @@
       ready() {
         super.ready();
 
-        //if (this.required) {
+        if (this.required) {
           this.addEventListener('blur', this._validateRequired.bind(this));
-       // }
+        }
+
+        if (this.pattern) {
+          this.addEventListener('blur', () => this._validatePattern(this.pattern));
+        }
       }
 
       _isNoError(helpertext, error) {
@@ -71,13 +75,24 @@
       }
 
       _validateRequired() {
-        const textInput = this.$.input.value;
+        const valueInput = this.$.input.value;
 
-        if (textInput.length === 0) {
+        if (valueInput.length === 0) {
           this.setAttribute('error', true);
         } else {
           this.removeAttribute('error');
         };
+      }
+
+      _validatePattern(pattern) {
+        const valueInput = this.$.input.value;
+
+        const regExp = new RegExp(pattern);
+        const result = regExp.test(valueInput);
+
+        !result
+        ? this.setAttribute('error', true)
+        : this.removeAttribute('error')
       }
 
       static get properties() {

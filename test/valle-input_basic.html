@@ -21,6 +21,12 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="inputWithPattern">
+      <template>
+        <valle-input label="Name" helpertext="Full name" errortext="Invalid name" pattern="Valle web"></valle-input>
+      </template>
+    </test-fixture>
+
     <script>
       suite('valle-input required', () => {
 
@@ -41,6 +47,35 @@
           assert.isTrue(inputRequired.hasAttribute('error'));
         });
 
+      });
+
+      suite('valle-input pattern', () => {
+
+        let inputWithPattern;
+
+        setup(() => {
+          inputWithPattern = fixture('inputWithPattern');
+        });
+
+        test('Should validate based in pattern regexp', () => {
+          const input = inputWithPattern.shadowRoot.querySelector('input');
+
+          assert.isFalse(inputWithPattern.hasAttribute('error'));
+
+          MockInteractions.blur(input);
+          assert.isTrue(inputWithPattern.hasAttribute('error'));
+
+          input.value = 'Valle web';
+
+          MockInteractions.blur(input);
+          assert.isFalse(inputWithPattern.hasAttribute('error'));
+
+          input.value = 'Valle wedsfas';
+
+          MockInteractions.blur(input);
+          assert.isTrue(inputWithPattern.hasAttribute('error'));
+
+        });
       });
     </script>
 
