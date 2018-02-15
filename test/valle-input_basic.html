@@ -8,42 +8,37 @@
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../iron-test-helpers/mock-interactions.js"></script>
 
     <link rel="import" href="../../polymer/polymer.html">
     <link rel="import" href="../valle-input.html">
   </head>
   <body>
 
-    <test-fixture id="basicTestFixture">
+    <test-fixture id="inputRequired">
       <template>
-        <valle-input></valle-input>
-      </template>
-    </test-fixture>
-
-    <test-fixture id="testFixtureWithProp">
-      <template>
-        <valle-input prop1="Humans"></valle-input>
+        <valle-input label="Name" helpertext="Full name" errortext="Invalid name" required></valle-input>
       </template>
     </test-fixture>
 
     <script>
-      suite('valle-input', () => {
+      suite('valle-input required', () => {
 
-        let basicElement,
-            elementWithProp;
+        let inputRequired;
 
         setup(() => {
-          basicElement = fixture('basicTestFixture');
-          elementWithProp = fixture('testFixtureWithProp');
+          inputRequired = fixture('inputRequired');
         });
 
-        test('Should render the element with default <h1> text', () => {
-          const h1 = basicElement.shadowRoot.querySelector('h1');
-          assert.equal(h1.textContent, 'Hello World!');
-        });
+        test('Should add error attribute if the input is empty', () => {
+          const input = inputRequired.shadowRoot.querySelector('input');
 
-        test('Should render the element with prop1', () => {
-          assert.equal(elementWithProp.prop1, 'Humans');
+          assert.isFalse(inputRequired.hasAttribute('error'));
+          assert.equal(input.value, '');
+
+          MockInteractions.blur(input);
+          
+          assert.isTrue(inputRequired.hasAttribute('error'));
         });
 
       });
