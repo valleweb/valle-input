@@ -22,20 +22,20 @@
 
     <input
       id="input"
-      type="text"
+      type=[[type]]
       placeholder=[[placeholder]]
+      pattern=[[RegEx]]
       aria-labelledby="inputLabel"
       aria-describedby="description"
     >
 
     <template is="dom-if" if={{_isNoError(helpertext,error)}}>
-      <span id="description">[[helpertext]]</span>
+      <small id="description">[[helpertext]]</small>
     </template>
 
     <template is="dom-if" if=[[error]]>
       <span role="alert" id="description">
-        [[errortext]]
-        <span class="visual-hidden">: [[helpertext]]</span>
+        [[errortext]]<small class="visual-hidden">: [[helpertext]]</small>
       </span>
     </template>
 
@@ -65,9 +65,15 @@
       static get properties() {
         return {
           label: String,
+          type: {
+            type: String,
+            value: "text"
+          },
           placeholder: String,
           helpertext: String,
+          maxlength: Number,
           errortext: String,
+          pattern: String,
           error: {
             type: Boolean,
             value: false,

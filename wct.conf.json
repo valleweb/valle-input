@@ -2,7 +2,16 @@
   "verbose": true,
   "plugins": {
     "local": {
-      "browsers": ["chrome","firefox"]
+      "browsers": ["chrome", "firefox"],
+      "browserOptions": {
+        "chrome": [
+          "headless",
+          "disable-gpu"
+        ],
+        "firefox": [
+          "--headless"
+        ]
+      }
     }
   }
 }
