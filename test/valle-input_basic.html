@@ -33,6 +33,30 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="inputTypePassword">
+      <template>
+        <valle-input label="Name" type="password"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputTypeEmail">
+      <template>
+        <valle-input label="Name" type="email"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputTypeNumber">
+      <template>
+        <valle-input label="name" type="number"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputTypeTel">
+      <template>
+        <valle-input label="Name" type="tel"></valle-input>
+      </template>
+    </test-fixture>
+
     <script>
       suite('valle-input required', () => {
 
@@ -99,6 +123,49 @@
           assert.isTrue(input.hasAttribute('maxlength'));
           assert.equal(maxLength, '7');
 
+        });
+      });
+
+      suite('valle-input type', () => {
+
+        let inputTypePassword,
+            inputTypeEmail,
+            inputTypeNumber,
+            inputTypeTel;
+
+        setup(() => {
+          inputTypePassword = fixture('inputTypePassword');
+          inputTypeEmail = fixture('inputTypeEmail');
+          inputTypeNumber = fixture('inputTypeNumber');
+          inputTypeTel = fixture('inputTypeTel');
+        });
+
+        test('Should render a password input', () => {
+          const input = inputTypePassword.shadowRoot.querySelector('input');
+          const typeInput = input.type;
+
+          assert.equal(typeInput, 'password');
+        });
+
+        test('Should render a email input', () => {
+          const input = inputTypeEmail.shadowRoot.querySelector('input');
+          const typeInput = input.type;
+
+          assert.equal(typeInput, 'email');
+        });
+
+        test('Should render a number input', () => {
+          const input = inputTypeNumber.shadowRoot.querySelector('input');
+          const typeInput = input.type;
+
+          assert.equal(typeInput, 'number');
+        });
+
+        test('Should render a tel input', () => {
+          const input = inputTypeTel.shadowRoot.querySelector('input');
+          const typeInput = input.type;
+
+          assert.equal(typeInput, 'tel');
         });
       });
     </script>
