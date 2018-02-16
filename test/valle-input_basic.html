@@ -63,6 +63,12 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="valueBinding">
+      <template>
+        <valle-input label="name"></valle-input>
+      </template>
+    </test-fixture>
+
     <script>
       suite('valle-input required', () => {
 
@@ -203,6 +209,24 @@
 
           MockInteractions.blur(input);
           assert.isTrue(inputValidateName.hasAttribute('error'));
+        });
+      });
+
+      suite('valle-input value binding', () => {
+
+        let valueBinding;
+
+        setup(() => {
+          valueBinding = fixture('valueBinding');
+        });
+
+        test('Should return a correct input value with javascript API', () => {
+          const input = valueBinding.shadowRoot.querySelector('input');
+
+          input.value = 'Value tests';
+
+          MockInteractions.keyUpOn(input);
+          assert.equal(valueBinding.value, input.value);
         });
       });
     </script>

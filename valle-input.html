@@ -49,6 +49,8 @@
       ready() {
         super.ready();
 
+        this.addEventListener('keyup', this._bindValue.bind(this));
+
         if (this.required) {
           this.addEventListener('blur', this._validateRequired.bind(this));
         }
@@ -62,6 +64,10 @@
         if (this.validateby === 'name') {
           this.addEventListener('blur', () => this._validate('[A-z][ ][A-z]'));
         }
+      }
+
+      _bindValue() {
+        this.value = this.$.input.value;
       }
 
       _isNoError(helpertext, error) {
@@ -121,6 +127,7 @@
           maxlength: Number,
           errortext: String,
           pattern: String,
+          value: String,
           error: {
             type: Boolean,
             value: false,
