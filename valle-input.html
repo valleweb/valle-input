@@ -54,10 +54,13 @@
         }
 
         if (this.pattern) {
-          this.addEventListener('blur', () => this._validatePattern(this.pattern));
+          this.addEventListener('blur', () => this._validate(this.pattern));
         } else if (this.maxlength) {
-          console.log(this.maxlength);
           this._maxlengthControl.bind(this, this.maxlength)();
+        }
+
+        if (this.validateby === 'name') {
+          this.addEventListener('blur', () => this._validate('[A-z][ ][A-z]'));
         }
       }
 
@@ -94,7 +97,7 @@
 
       }
 
-      _validatePattern(pattern) {
+      _validate(pattern) {
         const valueInput = this.$.input.value;
 
         const regExp = new RegExp(pattern);
@@ -112,6 +115,7 @@
             type: String,
             value: "text"
           },
+          validateby: String,
           placeholder: String,
           helpertext: String,
           maxlength: Number,

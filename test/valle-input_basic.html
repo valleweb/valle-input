@@ -57,6 +57,12 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="inputValidateName">
+      <template>
+        <valle-input label="Name" validateby="name"></valle-input>
+      </template>
+    </test-fixture>
+
     <script>
       suite('valle-input required', () => {
 
@@ -166,6 +172,37 @@
           const typeInput = input.type;
 
           assert.equal(typeInput, 'tel');
+        });
+      });
+
+      suite('valle-input validateby', () => {
+
+        let inputValidateName;
+
+        setup(() => {
+          inputValidateName = fixture('inputValidateName');
+        });
+
+        test('Should render a validate name input', () => {
+          const input = inputValidateName.shadowRoot.querySelector('input');
+          const typeInput = input.type;
+
+          assert.equal(typeInput, 'text');
+
+          assert.isFalse(inputValidateName.hasAttribute('error'));
+
+          MockInteractions.blur(input);
+          assert.isTrue(inputValidateName.hasAttribute('error'));
+
+          input.value = 'Larissa Abreu';
+
+          MockInteractions.blur(input);
+          assert.isFalse(inputValidateName.hasAttribute('error'));
+
+          input.value = 'Larissa';
+
+          MockInteractions.blur(input);
+          assert.isTrue(inputValidateName.hasAttribute('error'));
         });
       });
     </script>
