@@ -27,6 +27,12 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="inputWithMaxLength">
+      <template>
+        <valle-input label="Name" helpertext="Full name" errortext="Invalid name" maxlength="7"></valle-input>
+      </template>
+    </test-fixture>
+
     <script>
       suite('valle-input required', () => {
 
@@ -74,6 +80,24 @@
 
           MockInteractions.blur(input);
           assert.isTrue(inputWithPattern.hasAttribute('error'));
+
+        });
+      });
+
+      suite('valle-input maxlength', () => {
+
+        let inputWithMaxLength;
+
+        setup(() => {
+          inputWithMaxLength = fixture('inputWithMaxLength');
+        });
+
+        test('Should add readonly on input when value to be equal maxlength', () => {
+          const input = inputWithMaxLength.shadowRoot.querySelector('input');
+          const maxLength = input.getAttribute('maxlength');
+
+          assert.isTrue(input.hasAttribute('maxlength'));
+          assert.equal(maxLength, '7');
 
         });
       });

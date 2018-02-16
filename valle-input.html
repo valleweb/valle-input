@@ -55,6 +55,9 @@
 
         if (this.pattern) {
           this.addEventListener('blur', () => this._validatePattern(this.pattern));
+        } else if (this.maxlength) {
+          console.log(this.maxlength);
+          this._maxlengthControl.bind(this, this.maxlength)();
         }
       }
 
@@ -82,6 +85,13 @@
         } else {
           this.removeAttribute('error');
         };
+      }
+
+      _maxlengthControl(maxlength) {
+        const input = this.$.input;
+
+        input.setAttribute('maxlength', maxlength);
+
       }
 
       _validatePattern(pattern) {
