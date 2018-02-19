@@ -57,12 +57,12 @@
 
         if (this.pattern) {
           this.addEventListener('blur', () => this._validate(this.pattern));
-        } else if (this.maxlength) {
-          this._maxlengthControl.bind(this, this.maxlength)();
+        } else if (this.validateby === 'name') {
+          this.addEventListener('blur', () => this._validate('[A-z][ ][A-z]'));
         }
 
-        if (this.validateby === 'name') {
-          this.addEventListener('blur', () => this._validate('[A-z][ ][A-z]'));
+        if (this.maxlength) {
+          this._maxlengthControl.bind(this, this.maxlength)();
         }
       }
 
@@ -88,12 +88,11 @@
 
       _validateRequired() {
         const valueInput = this.$.input.value;
+        const isEmpty = valueInput.length === 0;
 
-        if (valueInput.length === 0) {
-          this.setAttribute('error', true);
-        } else {
-          this.removeAttribute('error');
-        };
+        isEmpty
+        ? this.setAttribute('error', true)
+        : this.removeAttribute('error')
       }
 
       _maxlengthControl(maxlength) {
