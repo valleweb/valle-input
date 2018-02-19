@@ -46,6 +46,30 @@
 
       static get is() { return 'valle-input'; }
 
+      ready() {
+        super.ready();
+
+        this.addEventListener('keyup', this._bindValue.bind(this));
+
+        if (this.required) {
+          this.addEventListener('blur', this._validateRequired.bind(this));
+        }
+
+        if (this.pattern) {
+          this.addEventListener('blur', () => this._validate(this.pattern));
+        } else if (this.validateby === 'name') {
+          this.addEventListener('blur', () => this._validate('[A-z][ ][A-z]'));
+        }
+
+        if (this.maxlength) {
+          this._maxlengthControl.bind(this, this.maxlength)();
+        }
+      }
+
+      _bindValue() {
+        this.value = this.$.input.value;
+      }
+
       _isNoError(helpertext, error) {
         return helpertext && !error;
       }
@@ -62,6 +86,33 @@
         : this.$.input.removeAttribute('disabled')
       }
 
+      _validateRequired() {
+        const valueInput = this.$.input.value;
+        const isEmpty = valueInput.length === 0;
+
+        isEmpty
+        ? this.setAttribute('error', true)
+        : this.removeAttribute('error')
+      }
+
+      _maxlengthControl(maxlength) {
+        const input = this.$.input;
+
+        input.setAttribute('maxlength', maxlength);
+
+      }
+
+      _validate(pattern) {
+        const valueInput = this.$.input.value;
+
+        const regExp = new RegExp(pattern);
+        const result = regExp.test(valueInput);
+
+        !result
+        ? this.setAttribute('error', true)
+        : this.removeAttribute('error')
+      }
+
       static get properties() {
         return {
           label: String,
@@ -69,11 +120,13 @@
             type: String,
             value: "text"
           },
+          validateby: String,
           placeholder: String,
           helpertext: String,
           maxlength: Number,
           errortext: String,
           pattern: String,
+          value: String,
           error: {
             type: Boolean,
             value: false,
@@ -82,7 +135,6 @@
           required: {
             type: Boolean,
             value: false,
-            reflectToAttribute: true,
             observer: '_toogleRequired'
           },
           disabled: {
