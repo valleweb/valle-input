@@ -33,7 +33,7 @@ $ bower install valle-input --save
 -->
 
 ```html
-<valle-input></valle-input>
+<valle-input label="Name" placeholder="Adam Sandler" helpertext="Full name"></valle-input>
 ```
 
 ## Properties
