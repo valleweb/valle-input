@@ -33,23 +33,32 @@ $ bower install valle-input --save
 -->
 
 ```html
-<valle-input></valle-input>
+<valle-input label="Name" placeholder="Adam Sandler" helpertext="Full name"></valle-input>
 ```
 
 ## Properties
 
-Property  | Type        | Default   | Description
-:---      |:---         |:---       |:---
-`prop1`   | *String*    | `World`   | Prop description
+Property      | Type        | Default   | Description
+:---          |:---         |:---       |:---
+`label`       | *String*    | `""`      | Default label
+`type`        | *String*    | `text`    | Input type
+`validateby`  | *String*    | `""`      | Type for validate (available: `name`)
+`placeholder` | *String*    | `""`      | Default placeholder
+`helpertext`  | *String*    | `""`      | Description text for help
+`errortext`   | *Srting*    | `""`      | Error message
+`pattern`     | *String*    | `""`      | RegExp for validate
+`value`       | *String*    | `""`      | Input value
+`error`       | *Boolean*   | `false`   | Error state
+`required`    | *Boolean*   | `false`   | Required validate
+`disabled`    | *Boolean*   | `false`   | Disabled state
 
 ## Styling
 
 The following custom properties and mixins are available for styling:
 
-Custom property                | Default  | Description
-:---                           |:---      |:---
---vsc-element-text-color       | #f44277  | Text color
---vsc-element-text             | {}       | Text styles
+Custom property           | Default                   | Description
+:---                      |:---                       |:---
+--valle-input-color       | `rgba(5, 159, 183, .87)`  | Primary color
 
 
 ## Browser Support
