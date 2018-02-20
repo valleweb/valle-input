@@ -16,12 +16,72 @@
         left: -10000px;
       }
 
-    </style>
+      .input {
+        border: 0;
+        border-bottom: 2px solid rgba(0, 0, 0, .87);
+        color: rgba(0, 0, 0, .87);
+        display: block;
+        font-size: 16px;
+        margin-top: 29px;
+        outline: 0;
+        padding: 8px 0;
+        width: 100%;
+      }
 
-    <label id="inputLabel">[[label]]</label>
+      .input:focus {
+        border-color: var(--valle-input-color, rgb(5, 159, 183));
+      }
+
+      .label {
+        color: rgba(0, 0, 0, .54);
+        display: block;
+        font-size: 12px;
+        left: 0;
+        padding-top: 16px;
+        position: absolute;
+        top: 0;
+      }
+
+      .input:focus + .label {
+        color: var(--valle-input-color, rgba(5, 159, 183, .87));
+      }
+
+      .description {
+        color: rgba(0, 0, 0, .54);
+        display: block;
+        font-size: 12px;
+        padding-top: 8px;
+      }
+
+      :host([error]) .description,
+      :host([error]) .label,
+      :host([error]) .input:focus + .label {
+        color: rgba(255, 0, 0, .87);
+      }
+
+      :host([error]) .input {
+        border-color: rgb(255, 0, 0);
+      }
+
+      :host([disabled]) .input {
+        background-color: initial;
+        border-bottom: 1px dotted rgba(0, 0, 0, .42);
+        color: rgba(0, 0, 0, .38);
+      }
+
+      :host([disabled]) .label {
+        color: rgba(0, 0, 0, .38);
+      }
+
+      :host([required]) .label::after {
+        content: ' *';
+      }
+
+    </style>
 
     <input
       id="input"
+      class="input"
       type=[[type]]
       placeholder=[[placeholder]]
       pattern=[[RegEx]]
@@ -29,12 +89,14 @@
       aria-describedby="description"
     >
 
+    <label id="inputLabel" class="label">[[label]]</label>
+
     <template is="dom-if" if={{_isNoError(helpertext,error)}}>
-      <small id="description">[[helpertext]]</small>
+      <small id="description" class="description">[[helpertext]]</small>
     </template>
 
     <template is="dom-if" if=[[error]]>
-      <span role="alert" id="description">
+      <span role="alert" id="description" class="description">
         [[errortext]]<small class="visual-hidden">: [[helpertext]]</small>
       </span>
     </template>
