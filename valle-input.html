@@ -105,7 +105,9 @@
   <script>
     class valleInput extends Polymer.Element {
 
-      static get is() { return 'valle-input'; }
+      static get is() {
+        return 'valle-input';
+      }
 
       ready() {
         super.ready();
@@ -137,14 +139,14 @@
 
       _toogleRequired(required) {
         required
-        ? this.$.input.setAttribute('aria-required', true)
-        : this.$.input.removeAttribute('aria-required')
+          ? this.$.input.setAttribute('aria-required', true)
+          : this.$.input.removeAttribute('aria-required');
       }
 
       _toogleDisabled(disabled) {
         disabled
-        ? this.$.input.setAttribute('disabled', true)
-        : this.$.input.removeAttribute('disabled')
+          ? this.$.input.setAttribute('disabled', true)
+          : this.$.input.removeAttribute('disabled');
       }
 
       _validateRequired() {
@@ -152,8 +154,8 @@
         const isEmpty = valueInput.length === 0;
 
         isEmpty
-        ? this.setAttribute('error', true)
-        : this.removeAttribute('error')
+          ? this.setAttribute('error', true)
+          : this.removeAttribute('error');
       }
 
       _maxlengthControl(maxlength) {
@@ -170,8 +172,8 @@
         const result = regExp.test(valueInput);
 
         !result
-        ? this.setAttribute('error', true)
-        : this.removeAttribute('error')
+          ? this.setAttribute('error', true)
+          : this.removeAttribute('error');
       }
 
       static get properties() {
@@ -179,7 +181,7 @@
           label: String,
           type: {
             type: String,
-            value: "text"
+            value: 'text'
           },
           validateby: String,
           placeholder: String,
