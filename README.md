@@ -51,6 +51,7 @@ Property      | Type        | Default   | Description
 `error`       | *Boolean*   | `false`   | Error state
 `required`    | *Boolean*   | `false`   | Required validate
 `disabled`    | *Boolean*   | `false`   | Disabled state
+`autofocus`   | *Boolean*   | `false`   | Default autofocus
 
 ## Styling
 
