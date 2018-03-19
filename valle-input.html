@@ -9,6 +9,7 @@
         display: inline-block;
         position: relative;
         overflow: hidden;
+        width: 100%;
       }
 
       .visual-hidden {
@@ -86,6 +87,7 @@
       placeholder=[[placeholder]]
       aria-labelledby="inputLabel"
       aria-describedby="description"
+      autofocus=[[autofocus]]
     >
 
     <label id="inputLabel" class="label">[[label]]</label>
@@ -205,6 +207,10 @@
             value: false,
             reflectToAttribute: true,
             observer: '_toogleDisabled'
+          },
+          autofocus: {
+            type: Boolean,
+            value: false
           }
         };
       }
