@@ -228,6 +228,14 @@
           MockInteractions.keyUpOn(input);
           assert.equal(valueBinding.value, input.value);
         });
+
+        test('Should control value with javascript API', () => {
+          const input = valueBinding.shadowRoot.querySelector('input');
+
+          valueBinding.value = 'Value with JS';
+
+          assert.equal(valueBinding.value, input.value);
+        });
       });
     </script>
 

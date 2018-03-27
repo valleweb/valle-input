@@ -88,6 +88,7 @@
       aria-labelledby="inputLabel"
       aria-describedby="description"
       autofocus=[[autofocus]]
+      value=[[value]]
     >
 
     <label id="inputLabel" class="label">[[label]]</label>
@@ -191,7 +192,10 @@
           maxlength: Number,
           errortext: String,
           pattern: String,
-          value: String,
+          value: {
+            type: String,
+            reflectToAttribute: true
+          },
           error: {
             type: Boolean,
             value: false,
