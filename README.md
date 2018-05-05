@@ -60,7 +60,7 @@ The following custom properties and mixins are available for styling:
 Custom property           | Default                   | Description
 :---                      |:---                       |:---
 --valle-input-color       | `rgba(5, 159, 183, .87)`  | Primary color
-
+--valle-input-width       | `100%`                    | Input Width
 
 ## Browser Support
 
