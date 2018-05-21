@@ -70,6 +70,18 @@
         color: rgba(0, 0, 0, .38);
       }
 
+      :host([uppercase]) .input {
+        text-transform: uppercase;
+      }
+
+      :host([lowercase]) .input {
+        text-transform: lowercase;
+      }
+
+      :host([capitalize]) .input {
+        text-transform: capitalize;
+      }
+
       :host([disabled]) .label {
         color: rgba(0, 0, 0, .38);
       }
@@ -213,6 +225,18 @@
             observer: '_toogleDisabled'
           },
           autofocus: {
+            type: Boolean,
+            value: false
+          },
+          uppercase: {
+            type: Boolean,
+            value: false
+          },
+          lowercase: {
+            type: Boolean,
+            value: false
+          },
+          capitalize: {
             type: Boolean,
             value: false
           }
