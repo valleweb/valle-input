@@ -139,30 +139,99 @@
           this.addEventListener('blur', () => this._validate('[A-z][ ][A-z]'));
         }
 
+        if (this.cpf) {
+          this.placeholder = 'xxx.xxx.xxx-xx';
+          this.maxlength = 14;
+          this.addEventListener('keypress', () => this._mask(this._maskCpf));
+        }
+
+        if (this.cnpj) {
+          this.placeholder = 'xx.xxx.xxx/xxxx-xx';
+          this.maxlength = 18;
+          this.addEventListener('keypress', () => this._mask(this._maskCnpj));
+        }
+
+        if (this.cep) {
+          this.placeholder = 'xxxxx-xxx';
+          this.maxlength = 9;
+          this.addEventListener('keypress', () => this._mask(this._maskCep));
+        }
+
+        if (this.dolar) {
+          this.placeholder = '$';
+          this.addEventListener('keypress', () => this._mask(this._maskDolar));
+        }
+
+        if (this.real) {
+          this.placeholder = 'R$';
+          this.addEventListener('keypress', () => this._mask(this._maskReal));
+        }
+
         if (this.maxlength) {
           this._maxlengthControl.bind(this, this.maxlength)();
         }
+      };
+
+      _mask(type) {
+        setTimeout(this.execmask(type), 1);
+      };
+
+      execmask(type) {
+        this.$.input.value = type(this.$.input.value);
+      };
+
+      _maskCpf(value) {
+        value=value.replace(/\D/g,"");
+        value=value.replace(/(\d{3})(\d)/,"$1.$2");
+        value=value.replace(/(\d{3})(\d)/,"$1.$2");
+        value=value.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+        return value;
+      };
+
+      _maskCnpj(value) {
+        value=value.replace(/\D/g,"");
+        value=value.replace(/^(\d{2})(\d)/,"$1.$2");
+        value=value.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3");
+        value=value.replace(/\.(\d{3})(\d)/,".$1/$2");
+        value=value.replace(/(\d{4})(\d)/,"$1-$2");
+        return value;
+      };
+
+      _maskCep(value) {
+        value=value.replace(/\D/g,"");
+        value=value.replace(/^(\d{5})(\d)/,"$1-$2");
+        return value;
+      };
+
+      _maskReal(value) {
+        value=value.replace(/\D/g,"");
+        value=value.replace(/(\d{1})(\d{17})$/,"$1.$2");
+        value=value.replace(/(\d{1})(\d{13})$/,"$1.$2");
+        value=value.replace(/(\d{1})(\d{10})$/,"$1.$2");
+        value=value.replace(/(\d{1})(\d{7})$/,"$1.$2");
+        value=value.replace(/(\d{1})(\d{1})$/,"$1,$2");
+        return value;
       }
 
       _bindValue() {
         this.value = this.$.input.value;
-      }
+      };
 
       _isNoError(helpertext, error) {
         return helpertext && !error;
-      }
+      };
 
       _toogleRequired(required) {
         required
           ? this.$.input.setAttribute('aria-required', true)
           : this.$.input.removeAttribute('aria-required');
-      }
+      };
 
       _toogleDisabled(disabled) {
         disabled
           ? this.$.input.setAttribute('disabled', true)
           : this.$.input.removeAttribute('disabled');
-      }
+      };
 
       _validateRequired() {
         const valueInput = this.$.input.value;
@@ -171,14 +240,14 @@
         isEmpty
           ? this.setAttribute('error', true)
           : this.removeAttribute('error');
-      }
+      };
 
       _maxlengthControl(maxlength) {
         const input = this.$.input;
 
         input.setAttribute('maxlength', maxlength);
 
-      }
+      };
 
       _validate(pattern) {
         const valueInput = this.$.input.value;
@@ -189,7 +258,7 @@
         !result
           ? this.setAttribute('error', true)
           : this.removeAttribute('error');
-      }
+      };
 
       static get properties() {
         return {
@@ -237,6 +306,26 @@
             value: false
           },
           capitalize: {
+            type: Boolean,
+            value: false
+          },
+          cpf: {
+            type: Boolean,
+            value: false
+          },
+          cnpj: {
+            type: Boolean,
+            value: false
+          },
+          cep: {
+            type: Boolean,
+            value: false
+          },
+          real: {
+            type: Boolean,
+            value: false
+          },
+          dolar: {
             type: Boolean,
             value: false
           }
