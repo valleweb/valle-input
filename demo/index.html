@@ -1,18 +1,14 @@
 <!doctype html>
-
 <html lang="en">
-
   <head>
-    <title>valle-input demo</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../valle-input.html">
-  </head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-  <body>
+    <title>valle-input demo</title>
+
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../valle-input.js"></script>
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -22,9 +18,9 @@
       </style>
     </custom-style>
 
-    <main class="vertical-section-container centered">
-      <h1>valle-input demo</h1>
-
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
       <!-- Default - demo
       ========================= -->
 
@@ -290,8 +286,6 @@
 
         </template>
       </demo-snippet>
-
-    </main>
-
+    </div>
   </body>
 </html>

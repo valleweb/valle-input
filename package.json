@@ -1,0 +1,34 @@
+{
+  "name": "@valle/valle-input",
+  "description": "Awesome valle-input - web component using Polymer 3x",
+  "version": "0.1.0",
+  "authors": [
+    "valleweb"
+  ],
+  "main": "valle-input.js",
+  "homepage": "https://github.com/valleweb/valle-input",
+  "bugs": {
+    "url": "https://github.com/valleweb/valle-input/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valleweb/valle-input"
+  },
+  "keywords": [
+    "polymer",
+    "polymer-3",
+    "web-components",
+    "valle-input"
+  ],
+  "license": "MIT",
+  "demos": {
+    "demo": "demo/index.html"
+  },
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0"
+  },
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.12",
+    "@webcomponents/webcomponentsjs": "^2.0.0"
+  }
+}
