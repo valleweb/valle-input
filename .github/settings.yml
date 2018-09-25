@@ -2,20 +2,34 @@
 
 # Labels: define labels for Issues and Pull Requests
 labels:
+  - name: A11y
+    oldname: good first issue
+    color: 77cad8
+  - name: API
+    oldname: invalid
+    color: 04d6c1
   - name: Bug
     color: ee0701
   - name: Component
+    oldname: question
     color: cdc2f9
+  - name: Deprecated
+    oldname: wontfix
+    color: ea8aaa
+  - name: Documentation
+    color: e08953
   - name: Duplicate
     color: cccccc
   - name: Enhancement
     color: 84b6eb
-  - name: Fixed
-    color: 14ffef
+  - name: Extra
+    color: dff282
   - name: Future
-    color: e24a9e
+    color: fc83a5
   - name: Help wanted
     color: ede27d
+  - name: Integration testing
+    color: fcf53f
   - name: Ok review
     color: 49b21c
   - name: Polymer 2x
@@ -23,28 +37,36 @@ labels:
   - name: Polymer 3x
     color: f998f5
   - name: pt - 0
-    color: 4faef2
+    color: 20f79a
   - name: pts - 0.5
-    color: 4faef2
+    color: 20f79a
   - name: pts - 1
-    color: 4faef2
+    color: 20f79a
   - name: pts - 2
-    color: 4faef2
+    color: 20f79a
   - name: pts - 3
-    color: 4faef2
+    color: 20f79a
   - name: pts - 5
-    color: 4faef2
+    color: 20f79a
   - name: pts - 8
-    color: 4faef2
+    color: 20f79a
   - name: pts - 13
-    color: 4faef2
+    color: 20f79a
   - name: pts - 20
-    color: 4faef2
+    color: 20f79a
   - name: pts - 40
-    color: 4faef2
+    color: 20f79a
   - name: pts - 100
-    color: 4faef2
+    color: 20f79a
+  - name: React
+    color: 315691
   - name: Review
     color: 5319e7
+  - name: UI
+    color: e9b3f9
+  - name: Unit tests
+    color: ffcccc
+  - name: UX
+    color: 3ffce9
   - name: Work in progress
     color: fbca04
