@@ -1,0 +1,50 @@
+﻿repository:
+
+# Labels: define labels for Issues and Pull Requests
+labels:
+  - name: Bug
+    color: ee0701
+  - name: Component
+    color: cdc2f9
+  - name: Duplicate
+    color: cccccc
+  - name: Enhancement
+    color: 84b6eb
+  - name: Fixed
+    color: 14ffef
+  - name: Future
+    color: e24a9e
+  - name: Help wanted
+    color: ede27d
+  - name: Ok review
+    color: 49b21c
+  - name: Polymer 2x
+    color: 94efab
+  - name: Polymer 3x
+    color: f998f5
+  - name: pt - 0
+    color: 4faef2
+  - name: pts - 0.5
+    color: 4faef2
+  - name: pts - 1
+    color: 4faef2
+  - name: pts - 2
+    color: 4faef2
+  - name: pts - 3
+    color: 4faef2
+  - name: pts - 5
+    color: 4faef2
+  - name: pts - 8
+    color: 4faef2
+  - name: pts - 13
+    color: 4faef2
+  - name: pts - 20
+    color: 4faef2
+  - name: pts - 40
+    color: 4faef2
+  - name: pts - 100
+    color: 4faef2
+  - name: Review
+    color: 5319e7
+  - name: Work in progress
+    color: fbca04
