@@ -102,6 +102,7 @@
       aria-describedby="description"
       autofocus=[[autofocus]]
       value=[[value]]
+      step=[[step]]
     >
 
     <label id="inputLabel" class="label">[[label]]</label>
@@ -329,6 +330,10 @@
           dolar: {
             type: Boolean,
             value: false
+          },
+          step: {
+            type: Number,
+            value: 0
           }
         };
       }
