@@ -52,6 +52,7 @@ Property      | Type        | Default   | Description
 `required`    | *Boolean*   | `false`   | Required validate
 `disabled`    | *Boolean*   | `false`   | Disabled state
 `autofocus`   | *Boolean*   | `false`   | Default autofocus
+`step`        | *Number*    | `0`       | Custom step for number inputs
 
 ## Styling
 

@@ -66,8 +66,9 @@
 
       :host([disabled]) .input {
         background-color: initial;
-        border-bottom: 1px dotted rgba(0, 0, 0, .42);
+        border-bottom: 2px solid rgba(0, 0, 0, .38);
         color: rgba(0, 0, 0, .38);
+        cursor: no-drop;
       }
 
       :host([uppercase]) .input {
@@ -101,6 +102,7 @@
       aria-describedby="description"
       autofocus=[[autofocus]]
       value=[[value]]
+      step=[[step]]
     >
 
     <label id="inputLabel" class="label">[[label]]</label>
@@ -328,6 +330,10 @@
           dolar: {
             type: Boolean,
             value: false
+          },
+          step: {
+            type: Number,
+            value: 0
           }
         };
       }
