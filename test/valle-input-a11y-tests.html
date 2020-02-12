@@ -1,0 +1,278 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>valle-input a11y test</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+
+    <script type="module" src="../valle-input.js"></script>
+  </head>
+  <body>
+
+    <test-fixture id="default">
+      <template>
+        <valle-input label="Label test"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="helperText">
+      <template>
+        <valle-input label="Label test" helpertext="Full name"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="helperTextAndError">
+      <template>
+        <valle-input label="Label test" helpertext="Full name" error></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="errorText">
+      <template>
+        <valle-input label="Label test" errortext="Invalid name"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="errorTextAndError">
+      <template>
+        <valle-input label="Label test" errortext="Invalid name" error></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="helperTextErrorAndErrorText">
+      <template>
+        <valle-input label="Label test" helpertext="Full name" errortext="Invalid name" error></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="disabled">
+      <template>
+        <valle-input label="Label test" disabled></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="required">
+      <template>
+        <valle-input label="Label test" required></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="requiredDisabled">
+      <template>
+        <valle-input label="Label test" helpertext="Full name" required disabled></valle-input>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('valle-input - default', () => {
+
+        let inputDefault;
+
+        setup(() => {
+          inputDefault = fixture('default');
+        });
+
+        test('Should render a basic input', () => {
+          const input = inputDefault.shadowRoot.querySelector('input');
+          const label = inputDefault.shadowRoot.querySelector('label');
+          const display = window.getComputedStyle(inputDefault, null).getPropertyValue('display');
+          const descriptions = inputDefault.shadowRoot.querySelectorAll('span');
+
+          const noDescriptions = descriptions.length === 0;
+
+          assert.equal(input.nodeName, 'INPUT');
+          assert.equal(label.nodeName, 'LABEL');
+
+          assert.equal(input.value, '');
+
+          assert.equal(label.textContent, 'Label test');
+          assert.equal(label.id, 'inputLabel');
+
+          assert.isTrue(input.hasAttribute('aria-labelledby'));
+          assert.equal(input.getAttribute('aria-labelledby'), label.id);
+
+          assert.isTrue(input.hasAttribute('aria-describedby'));
+          assert.equal(input.getAttribute('aria-describedby'), 'description');
+
+          assert.equal(display, 'inline-block');
+          assert.isTrue(noDescriptions);
+        });
+      });
+
+      suite('valle-input - with helper text', () => {
+
+        let inputHelperText,
+            inputHelperTextAndError;
+
+        setup(() => {
+          inputHelperText = fixture('helperText');
+          inputHelperTextAndError = fixture('helperTextAndError');
+        });
+
+        test('Should render a input with a helper text and no error', (done) => {
+          flush(() => {
+
+            const helperText = inputHelperText.shadowRoot.querySelector('small');
+            const errorText = inputHelperText.shadowRoot.querySelector('span');
+
+            assert.equal(helperText.nodeName, 'SMALL');
+            assert.equal(helperText.textContent, 'Full name');
+
+            assert.equal(errorText, null);
+
+            done();
+          });
+        });
+
+        test('Should render a input with a helper text and error', (done) => {
+          flush(() => {
+
+            const helperText = inputHelperTextAndError.shadowRoot.querySelector('small');
+            const helperTextStyle = window.getComputedStyle(helperText, null);
+            const inputStyle = window.getComputedStyle(inputHelperTextAndError, null);
+
+            assert.equal(helperText.nodeName, 'SMALL');
+            assert.equal(helperText.textContent, ': Full name');
+
+            assert.equal(inputStyle.getPropertyValue('position'), 'relative');
+            assert.equal(inputStyle.getPropertyValue('overflow'), 'hidden');
+
+            // assert.equal(helperTextStyle.getPropertyValue('position'), 'absolute');
+            // assert.equal(helperTextStyle.getPropertyValue('left'), '-10000px');
+
+            done();
+          })
+        })
+
+      });
+
+      suite('valle-input - with error text and error', () => {
+
+        const removeSpecialCharacter = string => string.replace(/\n/g, '');
+
+        let inputErrorAndErrorText,
+            inputHelperTextErrorAndErrorText,
+            inputErrorText;
+
+        setup(() => {
+          inputErrorAndErrorText = fixture('errorTextAndError');
+          inputHelperTextErrorAndErrorText = fixture('helperTextErrorAndErrorText');
+          inputErrorText = fixture('errorText');
+        });
+
+        test('Should render a input with error and error text', (done) => {
+          flush(() => {
+
+            const errorText = inputErrorAndErrorText.shadowRoot.querySelector('span');
+            const helperText = inputErrorAndErrorText.shadowRoot.querySelector('small');
+
+            assert.equal(errorText.nodeName, 'SPAN');
+            assert.equal(removeSpecialCharacter(errorText.innerText), 'Invalid name:');
+            assert.isTrue(errorText.hasAttribute('role'));
+            assert.equal(errorText.getAttribute('role'), 'alert');
+
+            assert.equal(helperText.nodeName, 'SMALL');
+            assert.equal(helperText.textContent, ': ');
+            done();
+          });
+        });
+
+        test('Should render a input with error, error text and helper text only visible for screen reader', (done) => {
+          flush(() => {
+
+            const errorText = inputHelperTextErrorAndErrorText.shadowRoot.querySelector('span');
+            const helperText = inputHelperTextErrorAndErrorText.shadowRoot.querySelector('small');
+            const helperTextStyle = window.getComputedStyle(helperText);
+            const inputStyle = window.getComputedStyle(inputHelperTextErrorAndErrorText);
+
+            assert.equal(removeSpecialCharacter(errorText.innerText), 'Invalid name: Full name');
+
+            assert.equal(helperText.nodeName, 'SMALL');
+            assert.equal(helperText.innerText, ': Full name');
+
+            // assert.equal(helperTextStyle.getPropertyValue('position'), 'absolute');
+            // assert.equal(helperTextStyle.getPropertyValue('left'), '-10000px');
+
+            assert.equal(inputStyle.getPropertyValue('position'), 'relative');
+            assert.equal(inputStyle.getPropertyValue('overflow'), 'hidden');
+
+            done();
+          });
+        });
+
+        test('Only should render a input with error text if error exist', (done) => {
+          flush(() => {
+            const errorText = inputErrorText.shadowRoot.querySelector('span');
+
+            assert.equal(errorText, null);
+
+            inputErrorText.error = true;
+
+            flush(() => {
+              const errorTextWithError = inputErrorText.shadowRoot.querySelector('span');
+
+              assert.equal(errorTextWithError.nodeName, 'SPAN');
+              assert.equal(removeSpecialCharacter(errorTextWithError.innerText), 'Invalid name:');
+              done();
+            });
+          });
+        });
+      });
+
+      suite('valle-input - disabled', () => {
+        let inputDisabled;
+
+        setup(() => {
+          inputDisabled = fixture('disabled');
+        });
+
+        test('Should render a disabled input', () => {
+          const input = inputDisabled.shadowRoot.querySelector('input');
+          const disabledInput = input.getAttribute('disabled');
+
+          assert.isTrue(input.hasAttribute('disabled'));
+          assert.equal(disabledInput, 'true');
+        });
+      });
+
+      suite('valle-input - required', () => {
+        let inputRequired,
+            inputRequiredAndDisabled;
+
+        setup(() => {
+          inputRequired = fixture('required');
+          inputRequiredAndDisabled = fixture('requiredDisabled');
+        });
+
+        test('Should render a required input', () => {
+          const input = inputRequired.shadowRoot.querySelector('input');
+          const requiredInput = input.getAttribute('aria-required');
+
+          assert.isTrue(input.hasAttribute('aria-required'));
+          assert.equal(requiredInput, 'true');
+        });
+
+        test('Should render a required input disabled', () => {
+          const input = inputRequiredAndDisabled.shadowRoot.querySelector('input');
+          const requiredInput = input.getAttribute('aria-required');
+          const disabledInput = input.getAttribute('disabled');
+
+          assert.isTrue(input.hasAttribute('aria-required'));
+          assert.equal(requiredInput, 'true');
+
+          assert.isTrue(input.hasAttribute('disabled'));
+          assert.equal(disabledInput, 'true');
+        });
+      });
+
+    </script>
+
+  </body>
+</html>

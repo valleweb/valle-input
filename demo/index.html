@@ -6,276 +6,188 @@
 
     <title>valle-input demo</title>
 
-    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
-    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
+
     <script type="module" src="../valle-input.js"></script>
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-        .vertical-section-container {
-          max-width: 500px;
-        }
       </style>
     </custom-style>
-
   </head>
   <body>
     <div class="vertical-section-container centered">
-      <!-- Default - demo
-      ========================= -->
+      <h1>All valle-input demo</h1>
 
-      <h2>Default</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Default -->
+      <h3>Default</h3>
+      <demo-snippet>
         <template>
-
           <valle-input></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Label - demo
-      ========================= -->
-
-      <h2>Label</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Label -->
+      <h3>Label</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name"></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Maxlength - demo
-      ========================= -->
-
-      <h2>Maxlength</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Maxlength -->
+      <h3>Maxlength</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" maxlength="8"></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Validate By - demo
-      ========================= -->
-
-      <h2>Validate by</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Validate by -->
+      <h3>Validate by</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" validateby="name" helpertext="Full name" errortext="Invalid name"></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Pattern - demo
-      ========================= -->
-
-      <h2>Pattern</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Pattern -->
+      <h3>Pattern</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" pattern="Olaaar" errortext="Invalid name"></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Placeholder - demo
-      ========================= -->
-
-      <h2>Placeholder</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Placeholder -->
+      <h3>Placeholder</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" placeholder="Rob Dodson"></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Helper text - demo
-      ========================= -->
-
-      <h2>Helper text</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Helper text -->
+      <h3>Helper text</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" helpertext="Full name"></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Error text - demo
-      ========================= -->
-
-      <h2>Error text</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Error text -->
+      <h3>Error text</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" errortext="Invalid name" error></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Required - demo
-      ========================= -->
-
-      <h2>Required</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Required -->
+      <h3>Required</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" errortext="Invalid name" helpertext="Campo obrigatório" required></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Uppercase - demo
-      ========================= -->
-
-      <h2>Uppercase</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Uppercase -->
+      <h3>Uppercase</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" uppercase></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Lowercase - demo
-      ========================= -->
-
-      <h2>Lowercase</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Lowercase -->
+      <h3>Lowercase</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" lowercase></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Capitalize - demo
-      ========================= -->
-
-      <h2>Capitalize</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Capitalize -->
+      <h3>Capitalize</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" capitalize></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Mask CPF - demo
-      ========================= -->
-
-      <h2>Mask CPF</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Mask CPF -->
+      <h3>Mask CPF</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="CPF" cpf></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Mask CNPJ - demo
-      ========================= -->
-
-      <h2>Mask CNPJ</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Mask CNPJ -->
+      <h3>Mask CNPJ</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="CNPJ" cnpj></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Mask CEP - demo
-      ========================= -->
-
-      <h2>Mask CEP</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Mask CEP -->
+      <h3>Mask CEP</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="CEP" cep></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Mask Dolar - demo
-      ========================= -->
-
-      <h2>Mask Dolar</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Mask Dolar -->
+      <h3>Mask Dolar</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Dolar" dolar></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Mask Real - demo
-      ========================= -->
-
-      <h2>Mask Real</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Mask Real -->
+      <h3>Mask Real</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Real" real></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Disabled - demo
-      ========================= -->
-
-      <h2>Disabled</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Disabled -->
+      <h3>Disabled</h3>
+      <demo-snippet>
         <template>
-
           <valle-input label="Name" disabled></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Full input - demo
-      ========================= -->
-
-      <h2>Full</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Custom step -->
+      <h3>Custom step</h3>
+      <demo-snippet>
         <template>
+          <valle-input type="time" step="1"></valle-input>
+        </template>
+      </demo-snippet>
 
+      <!-- Full input -->
+      <h3>Full input</h3>
+      <demo-snippet>
+        <template>
           <valle-input label="Name" placeholder="Rob Dodson" helpertext="Full name" required disabled></valle-input>
-
         </template>
       </demo-snippet>
 
-      <!-- Custom style - demo
-      ========================= -->
-
-      <h2>Custom style</h2>
-
-      <demo-snippet class="centered-demo">
+      <!-- Custom style -->
+      <h3>Custom style</h3>
+      <demo-snippet>
         <template>
-
           <style is="custom-style">
             .custom-style {
               --valle-input-color: #FF1493;
@@ -283,7 +195,6 @@
           </style>
 
           <valle-input class="custom-style" label="Name" placeholder="Larissa Abreu" helpertext="Full name"></valle-input>
-
         </template>
       </demo-snippet>
     </div>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>valle-input test</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+
+    <script type="module" src="valle-input-tests.js"></script>
+
+    <script type="module" src="../valle-input.js"></script>
+  </head>
+  <body>
+
+    <test-fixture id="inputRequired">
+      <template>
+        <valle-input label="Name" helpertext="Full name" errortext="Invalid name" required></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputWithPattern">
+      <template>
+        <valle-input label="Name" helpertext="Full name" errortext="Invalid name" pattern="Valle web"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputWithMaxLength">
+      <template>
+        <valle-input label="Name" helpertext="Full name" errortext="Invalid name" maxlength="7"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputTypePassword">
+      <template>
+        <valle-input label="Name" type="password"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputTypeEmail">
+      <template>
+        <valle-input label="Name" type="email"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputTypeNumber">
+      <template>
+        <valle-input label="name" type="number"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputTypeTel">
+      <template>
+        <valle-input label="Name" type="tel"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="inputValidateName">
+      <template>
+        <valle-input label="Name" validateby="name"></valle-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="valueBinding">
+      <template>
+        <valle-input label="name"></valle-input>
+      </template>
+    </test-fixture>
+
+  </body>
+</html>

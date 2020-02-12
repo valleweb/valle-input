@@ -1,9 +1,8 @@
 # valle-input
 
-> Awesome valle-input element - web component using Polymer 3x
+> Awesome valle input element - web component using Polymer 3x
 
-[![npm](https://img.shields.io/npm/v/@valle/valle-input.svg)](https://www.npmjs.com/package/@valle/valle-input)
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@valle/valle-input)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/valleweb/valle-input)
 
 ## How to install and use:
 
@@ -16,13 +15,13 @@ $ yarn add @valle/valle-input
 2 -  Import the element:
 
 ```html
-<script type="module" src="node_modules/@valle/valle-input/valle-input.js"></script>
+<script type="module" src="./node_modules/@valle/valle-input/valle-input.js"></script>
 ```
 
 or in your javascript file
 
 ```js
-import "@valle/valle-input/valle-input.js";
+import '@valle/valle-input/valle-input.js';
 ```
 
 3 - Start using it!
@@ -31,7 +30,7 @@ import "@valle/valle-input/valle-input.js";
 ```
 <custom-element-demo>
   <template>
-    <script type="module" src="valle-input.js"></script>
+    <link rel="import" href="./demo/index.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -58,15 +57,16 @@ Property      | Type        | Default   | Description
 `required`    | *Boolean*   | `false`   | Required validate
 `disabled`    | *Boolean*   | `false`   | Disabled state
 `autofocus`   | *Boolean*   | `false`   | Default autofocus
+`step`        | *Number*    | `0`       | Custom step for number inputs
 
 ## Styling
 
 The following custom properties and mixins are available for styling:
 
-Custom property             | Default                   | Description
-:---                        |:---                       |:---
---valle-input-color         | `rgba(5, 159, 183, .87)`  | Primary color
---valle-input-width         | `100%`                    | Input Width
+Custom property           | Default                   | Description
+:---                      |:---                       |:---
+--valle-input-color       | `rgba(5, 159, 183, .87)`  | Primary color
+--valle-input-width       | `100%`                    | Input Width
 
 ## Browser Support
 
@@ -78,27 +78,36 @@ Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 11+ | Latest ✔
 
 ## Development
 
-1 - Verify if you have [node](http://nodejs.org/) and [yarn](http://yarn.io/) installed.
-
-2 - Install [Polymer-CLI](https://www.polymer-project.org/1.0/docs/tools/polymer-cli):
+1 - Install [Yarn](https://yarnpkg.com/) & [Polymer-CLI](https://polymer-library.polymer-project.org/3.0/docs/install-3-0):
 
 ```sh
 $ [sudo] yarn global add polymer-cli
 ```
 
-3 - Install local dependencies:
+2 - Install local dependencies:
 
 ```sh
-$ yarn install
+$ yarn
 ```
 
-4 - Start the development server:
+3 - Start the development server:
 
 ```sh
-$ polymer serve
+$ yarn start
 ```
 
 Go to [localhost:8080/components/valle-input/](http://localhost:8080/components/valle-input/)
+
+
+## Tests
+
+#### Unit tests
+
+Run tests:
+
+```sh
+$ yarn test
+```
 
 ## Versioning
 
