@@ -36,28 +36,6 @@ labels:
     color: 94efab
   - name: Polymer 3x
     color: f998f5
-  - name: pt - 0
-    color: 20f79a
-  - name: pts - 0.5
-    color: 20f79a
-  - name: pts - 1
-    color: 20f79a
-  - name: pts - 2
-    color: 20f79a
-  - name: pts - 3
-    color: 20f79a
-  - name: pts - 5
-    color: 20f79a
-  - name: pts - 8
-    color: 20f79a
-  - name: pts - 13
-    color: 20f79a
-  - name: pts - 20
-    color: 20f79a
-  - name: pts - 40
-    color: 20f79a
-  - name: pts - 100
-    color: 20f79a
   - name: React
     color: 315691
   - name: Review
