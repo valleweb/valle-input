@@ -1,22 +1,27 @@
 # valle-input
 
-> Awesome valle input element
+> Awesome valle input element - web component using Polymer 3x
 
-[![Travis CI Status](https://travis-ci.org/valleweb/valle-input.svg?branch=master)](https://travis-ci.org/valleweb/valle-input)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/valleweb/valle-input)
 
 ## How to install and use:
 
-1 - Install the element using [Bower](http://bower.io/):
+1 - Install the element using [Yarn](http://yarn.io/):
 
 ```sh
-$ bower install valle-input --save
+$ yarn add @valle/valle-input
 ```
 
 2 -  Import the element:
 
 ```html
-<link rel="import" href="bower_components/valle-input/valle-input.html">
+<script type="module" src="./node_modules/@valle/valle-input/valle-input.js"></script>
+```
+
+or in your javascript file
+
+```js
+import '@valle/valle-input/valle-input.js';
 ```
 
 3 - Start using it!
@@ -25,7 +30,7 @@ $ bower install valle-input --save
 ```
 <custom-element-demo>
   <template>
-    <link rel="import" href="valle-input.html">
+    <link rel="import" href="./demo/index.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -73,22 +78,22 @@ Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 11+ | Latest ✔
 
 ## Development
 
-1 - Install [Bower](http://bower.io/) & [Polymer-CLI](https://www.polymer-project.org/1.0/docs/tools/polymer-cli):
+1 - Install [Yarn](https://yarnpkg.com/) & [Polymer-CLI](https://polymer-library.polymer-project.org/3.0/docs/install-3-0):
 
 ```sh
-$ [sudo] npm install -g bower polymer-cli
+$ [sudo] yarn global add polymer-cli
 ```
 
 2 - Install local dependencies:
 
 ```sh
-$ bower install
+$ yarn
 ```
 
 3 - Start the development server:
 
 ```sh
-$ polymer serve
+$ yarn start
 ```
 
 Go to [localhost:8080/components/valle-input/](http://localhost:8080/components/valle-input/)
@@ -96,35 +101,12 @@ Go to [localhost:8080/components/valle-input/](http://localhost:8080/components/
 
 ## Tests
 
-#### Linting
-
-Linting with eslint:
-
-```sh
-$ [sudo] npm install -g eslint
-$ [sudo] npm install -g eslint-plugin-html
-
-$ eslint *.html
-```
-
-Linting with polylint:
-
-```sh
-$ polymer lint
-```
-
 #### Unit tests
-
-Install the Web Component Tester (WCT) test runner:
-
-```sh
-$ [sudo] npm install -g web-component-tester
-```
 
 Run tests:
 
 ```sh
-$ wct
+$ yarn test
 ```
 
 ## Versioning
