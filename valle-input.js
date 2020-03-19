@@ -95,12 +95,12 @@ class ValleInput extends PolymerElement {
           position: relative;
           overflow: hidden;
           width: var(--valle-input-width, 100%);
-        };
+        }
 
         .visual-hidden {
           position: absolute;
           left: -10000px;
-        };
+        }
 
         .input {
           border: 0;
@@ -112,11 +112,11 @@ class ValleInput extends PolymerElement {
           outline: 0;
           padding: 8px 0;
           width: 100%;
-        };
+        }
 
         .input:focus {
           border-color: var(--valle-input-color, rgb(5, 159, 183));
-        };
+        }
 
         .label {
           color: rgba(0, 0, 0, .54);
@@ -126,55 +126,55 @@ class ValleInput extends PolymerElement {
           padding-top: 16px;
           position: absolute;
           top: 0;
-        };
+        }
 
         .input:focus + .label {
           color: var(--valle-input-color, rgba(5, 159, 183, .87));
-        };
+        }
 
         .description {
           color: rgba(0, 0, 0, .54);
           display: block;
           font-size: 12px;
           padding-top: 8px;
-        };
+        }
 
         :host([error]) .description,
         :host([error]) .label,
         :host([error]) .input:focus + .label {
           color: rgba(255, 0, 0, .87);
-        };
+        }
 
         :host([error]) .input {
           border-color: rgb(255, 0, 0);
-        };
+        }
 
         :host([disabled]) .input {
           background-color: initial;
           border-bottom: 2px solid rgba(0, 0, 0, .38);
           color: rgba(0, 0, 0, .38);
           cursor: no-drop;
-        };
+        }
 
         :host([uppercase]) .input {
           text-transform: uppercase;
-        };
+        }
 
         :host([lowercase]) .input {
           text-transform: lowercase;
-        };
+        }
 
         :host([capitalize]) .input {
           text-transform: capitalize;
-        };
+        }
 
         :host([disabled]) .label {
           color: rgba(0, 0, 0, .38);
-        };
+        }
 
         :host([required]) .label::after {
           content: ' *';
-        };
+        }
 
       </style>
 
