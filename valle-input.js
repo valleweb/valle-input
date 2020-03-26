@@ -112,6 +112,7 @@ class ValleInput extends PolymerElement {
           outline: 0;
           padding: 8px 0;
           width: 100%;
+          height: 32px;
         }
 
         .input:focus {
