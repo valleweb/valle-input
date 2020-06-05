@@ -21,6 +21,7 @@ class ValleInput extends PolymerElement {
       validateby: String,
       placeholder: String,
       helpertext: String,
+      minlength: Number,
       maxlength: Number,
       errortext: String,
       pattern: String,
@@ -251,6 +252,11 @@ class ValleInput extends PolymerElement {
     if (this.maxlength) {
       this._maxlengthControl.bind(this, this.maxlength)();
     };
+
+    if (this.minlength) {
+      this._minLengthControl.bind(this, this.minlength)();
+      this.addEventListener('blur', () => this._validateMinlength(this.minlength));
+    };
   };
 
   _mask(type) {
@@ -329,6 +335,22 @@ class ValleInput extends PolymerElement {
     input.setAttribute('maxlength', maxlength);
 
   };
+
+  _minLengthControl(minlength) {
+    const input = this.$.input;
+
+    input.setAttribute('minlength', minlength);
+
+  };
+
+  _validateMinlength(minlength) {
+    const valueInput = this.$.input.value;
+    const lengthInput = valueInput.length;
+
+    lengthInput < minlength
+      ? this.setAttribute('error', true)
+      : this.removeAttribute('error');
+  }
 
   _validate(pattern) {
     const valueInput = this.$.input.value;
