@@ -49,6 +49,10 @@ class ValleInput extends PolymerElement {
         type: Boolean,
         value: false
       },
+      propercase: {
+        type: Boolean,
+        value: false
+      },
       uppercase: {
         type: Boolean,
         value: false
@@ -257,7 +261,17 @@ class ValleInput extends PolymerElement {
       this._minLengthControl.bind(this, this.minlength)();
       this.addEventListener('blur', () => this._validateMinlength(this.minlength));
     };
+
+    if (this.propercase) {
+      this.addEventListener('keypress', () => this._properCaseControl(this.$.input.value));
+    };
   };
+
+  _properCaseControl(value) {
+    const listOfWords = value.split(' ');
+
+    console.log(listOfWords);
+  }
 
   _mask(type) {
     setTimeout(this.execmask(type), 1);
