@@ -263,23 +263,29 @@ class ValleInput extends PolymerElement {
     };
 
     if (this.propercase) {
-      this.addEventListener('keyup', () => this._mask(this._properCaseControl));
+      this.addEventListener('keyup', () => this._mask(this._properCaseControl.bind(this)));
     };
+  };
+
+  _toCapitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   _properCaseControl(value) {
     const listOfWords = value.split(' ');
-    const prepositions = ['de', 'da', 'do'];
+    const prepositions = ['da', 'de', 'do', 'das', 'dos', 'e', 'ou', 'em', 'um', 'uma', 'com', 'é', 'à', 'a', 'o'];
 
-    const newListofWords = listOfWords.map( word => {
+    const newListOfWords = listOfWords.map( word => {
       const wordLowerCase = word.toLowerCase();
 
       return prepositions.includes(wordLowerCase)
         ? wordLowerCase
-        : wordLowerCase.charAt(0).toUpperCase() + wordLowerCase.slice(1);
+        : this._toCapitalize(wordLowerCase);
     });
 
-    return newListofWords.join(' ');
+    const newPhrase = newListOfWords.join(' ');
+
+    return this._toCapitalize(newPhrase);
   };
 
   _mask(type) {
