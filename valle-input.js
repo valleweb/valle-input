@@ -21,6 +21,7 @@ class ValleInput extends PolymerElement {
       validateby: String,
       placeholder: String,
       helpertext: String,
+      minlength: Number,
       maxlength: Number,
       errortext: String,
       pattern: String,
@@ -45,6 +46,10 @@ class ValleInput extends PolymerElement {
         observer: '_toogleDisabled'
       },
       autofocus: {
+        type: Boolean,
+        value: false
+      },
+      propercase: {
         type: Boolean,
         value: false
       },
@@ -251,6 +256,36 @@ class ValleInput extends PolymerElement {
     if (this.maxlength) {
       this._maxlengthControl.bind(this, this.maxlength)();
     };
+
+    if (this.minlength) {
+      this._minLengthControl.bind(this, this.minlength)();
+      this.addEventListener('blur', () => this._validateMinlength(this.minlength));
+    };
+
+    if (this.propercase) {
+      this.addEventListener('keyup', () => this._mask(this._properCaseControl.bind(this)));
+    };
+  };
+
+  _toCapitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  _properCaseControl(value) {
+    const listOfWords = value.split(' ');
+    const prepositions = ['da', 'de', 'do', 'das', 'dos', 'e', 'ou', 'em', 'um', 'uma', 'com', 'é', 'à', 'a', 'o'];
+
+    const newListOfWords = listOfWords.map( word => {
+      const wordLowerCase = word.toLowerCase();
+
+      return prepositions.includes(wordLowerCase)
+        ? wordLowerCase
+        : this._toCapitalize(wordLowerCase);
+    });
+
+    const newPhrase = newListOfWords.join(' ');
+
+    return this._toCapitalize(newPhrase);
   };
 
   _mask(type) {
@@ -329,6 +364,22 @@ class ValleInput extends PolymerElement {
     input.setAttribute('maxlength', maxlength);
 
   };
+
+  _minLengthControl(minlength) {
+    const input = this.$.input;
+
+    input.setAttribute('minlength', minlength);
+
+  };
+
+  _validateMinlength(minlength) {
+    const valueInput = this.$.input.value;
+    const lengthInput = valueInput.length;
+
+    lengthInput < minlength
+      ? this.setAttribute('error', true)
+      : this.removeAttribute('error');
+  }
 
   _validate(pattern) {
     const valueInput = this.$.input.value;

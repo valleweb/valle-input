@@ -50,6 +50,32 @@ suite('valle-input pattern', () => {
   });
 });
 
+suite('valle-input minlength', () => {
+
+  let inputWithMinLength;
+
+  setup(() => {
+    inputWithMinLength = fixture('inputWithMinLength');
+  });
+
+  test('Should add error on input when value to be smaller than minlength', () => {
+    const input = inputWithMinLength.shadowRoot.querySelector('input');
+    const minLength = input.getAttribute('minlength');
+
+    assert.isTrue(input.hasAttribute('minlength'));
+    assert.equal(minLength, '5');
+
+    MockInteractions.blur(input);
+    assert.isTrue(inputWithMinLength.hasAttribute('error'));
+
+    input.value = 'Valle web';
+
+    MockInteractions.blur(input);
+    assert.isFalse(inputWithMinLength.hasAttribute('error'));
+
+  });
+});
+
 suite('valle-input maxlength', () => {
 
   let inputWithMaxLength;
