@@ -213,7 +213,7 @@ class ValleInput extends PolymerElement {
   ready() {
     super.ready();
 
-    this.addEventListener('keyup', this._bindValue.bind(this));
+    this.addEventListener('input', this._bindValue.bind(this));
 
     if (this.required) {
       this.addEventListener('blur', this._validateRequired.bind(this));
