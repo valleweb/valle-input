@@ -95,6 +95,10 @@ class ValleInput extends PolymerElement {
         type: Number,
         value: 0
       },
+      autocomplete: {
+        type: String,
+        value: 'off'
+      },
     };
   };
 
@@ -202,6 +206,7 @@ class ValleInput extends PolymerElement {
         step=[[step]]
         maxlength=[[maxlength]]
         minlength=[[minlength]]
+        autocomplete=[[autocomplete]]
       >
 
       <label id="inputLabel" class="label">[[label]]</label>
