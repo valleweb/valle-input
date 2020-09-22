@@ -43,21 +43,24 @@ import '@valle/valle-input/valle-input.js';
 
 ## Properties
 
-Property      | Type        | Default   | Description
-:---          |:---         |:---       |:---
-`label`       | *String*    | `""`      | Default label
-`type`        | *String*    | `text`    | Input type
-`validateby`  | *String*    | `""`      | Type for validate (available: `name`)
-`placeholder` | *String*    | `""`      | Default placeholder
-`helpertext`  | *String*    | `""`      | Description text for help
-`errortext`   | *Srting*    | `""`      | Error message
-`pattern`     | *String*    | `""`      | RegExp for validate
-`value`       | *String*    | `""`      | Input value
-`error`       | *Boolean*   | `false`   | Error state
-`required`    | *Boolean*   | `false`   | Required validate
-`disabled`    | *Boolean*   | `false`   | Disabled state
-`autofocus`   | *Boolean*   | `false`   | Default autofocus
-`step`        | *Number*    | `0`       | Custom step for number inputs
+Property        | Type        | Default   | Description
+:---            |:---         |:---       |:---
+`label`         | *String*    | `""`      | Default label
+`type`          | *String*    | `text`    | Input type
+`validateby`    | *String*    | `""`      | Type for validate (available: `name`)
+`placeholder`   | *String*    | `""`      | Default placeholder
+`helpertext`    | *String*    | `""`      | Description text for help
+`errortext`     | *Srting*    | `""`      | Error message
+`pattern`       | *String*    | `""`      | RegExp for validate
+`value`         | *String*    | `""`      | Input value
+`error`         | *Boolean*   | `false`   | Error state
+`required`      | *Boolean*   | `false`   | Required validate
+`disabled`      | *Boolean*   | `false`   | Disabled state
+`autofocus`     | *Boolean*   | `false`   | Default autofocus
+`step`          | *Number*    | `0`       | Custom step for number inputs
+`tooltip`       | *String*    | `""`      | A tooltip for inputs
+`tooltippos`    | *String*    | `""`      | Tooltip position (available: `top-right`)
+`tooltiplength` | *String*    | `""`      | Tooltip length (available: `small`, `medium` and `large`)
 
 ## Styling
 
