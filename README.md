@@ -70,6 +70,7 @@ Custom property           | Default                   | Description
 :---                      |:---                       |:---
 --valle-input-color       | `rgba(5, 159, 183, .87)`  | Primary color
 --valle-input-width       | `100%`                    | Input Width
+--icon-tooltip-color      | `#000`                    | Icon tooltip color
 
 ## Browser Support
 
