@@ -202,16 +202,32 @@ class ValleInput extends PolymerElement {
 
         .tooltip {
           overflow: visible;
-          width: 18px;
-          height: 18px;
+          width: 24px;
+          height: 24px;
           position: absolute;
           cursor: help;
-          top: 14px;
+          top: 0;
           right: 0;
+          border-radius: 3px;
+          transition: background .3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .tooltip:focus {
+          background: #ecebeb;
+          outline: none;
         }
 
         .tooltip svg {
-          fill: var(--icon---tooltip-color, #000);
+          fill: var(--icon-tooltip-color, #000);
+          width: 18px;
+          height: 18px;
+        }
+
+        .tooltip:hover svg{
+          fill: var(--valle-input-color, rgba(5, 159, 183, .87));
         }
 
         .tooltip::after {
@@ -219,7 +235,6 @@ class ValleInput extends PolymerElement {
           pointer-events: none;
           transition: all 0.18s ease-out 0.18s;
           text-indent: 0;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
           font-weight: normal;
           font-style: normal;
           text-shadow: none;
