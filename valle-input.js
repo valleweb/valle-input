@@ -206,7 +206,7 @@ class ValleInput extends PolymerElement {
           height: 24px;
           position: absolute;
           cursor: help;
-          top: 0;
+          top: 11px;
           right: 0;
           border-radius: 3px;
           transition: background .3s;
