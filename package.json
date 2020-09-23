@@ -1,7 +1,7 @@
 {
   "name": "@valle/valle-input",
   "description": "Awesome valle-input - web component using Polymer 3x",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "authors": [
     "valleweb"
   ],
