@@ -152,6 +152,10 @@ class ValleInput extends PolymerElement {
           top: 0;
         }
 
+        .tooltip ~ .label {
+          padding-right: 22px; /* Adjust for break line with helper icon */
+        }
+
         .input:focus + .label {
           color: var(--valle-input-color, rgba(5, 159, 183, .87));
         }
@@ -213,6 +217,7 @@ class ValleInput extends PolymerElement {
           display: flex;
           align-items: center;
           justify-content: center;
+          z-index: 2;
         }
 
         .tooltip:focus {
