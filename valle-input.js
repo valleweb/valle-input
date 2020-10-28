@@ -99,6 +99,7 @@ class ValleInput extends PolymerElement {
         type: String,
         value: 'off'
       },
+      name: String,
       tooltip: String,
       tooltippos: String,
       tooltiplength: String,
@@ -350,6 +351,7 @@ class ValleInput extends PolymerElement {
       </style>
 
       <input
+        name=[[name]]
         id="input"
         class="input"
         type=[[type]]
