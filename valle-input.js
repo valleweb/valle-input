@@ -167,10 +167,6 @@ class ValleInput extends PolymerElement {
           color: var(--valle-input-color, rgba(5, 159, 183, .87));
         }
 
-        .tooltip ~ .label {
-          padding-right: 22px; /* Adjust for break line with helper icon */
-        }
-
         .description {
           color: rgba(0, 0, 0, .54);
           display: block;
