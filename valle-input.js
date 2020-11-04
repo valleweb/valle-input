@@ -145,6 +145,10 @@ class ValleInput extends PolymerElement {
           border-color: var(--valle-input-color, rgb(5, 159, 183));
         }
 
+        .input:hover {
+          border-color: #000;
+        }
+
         .input::placeholder {
           color: rgba(0, 0, 0, .54);
         }
@@ -187,7 +191,7 @@ class ValleInput extends PolymerElement {
 
         :host([disabled]) .input {
           background-color: initial;
-          border-bottom: 2px solid rgba(0, 0, 0, .38);
+          border: 2px solid rgba(0, 0, 0, .12);
           color: rgba(0, 0, 0, .38);
           cursor: no-drop;
         }
