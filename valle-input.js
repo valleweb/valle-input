@@ -127,7 +127,7 @@ class ValleInput extends PolymerElement {
         }
 
         .input {
-          border: 2px solid rgba(0, 0, 0, .87);
+          border: 2px solid var(--valle-input-border-color, rgb(166, 166, 166));
           color: rgba(0, 0, 0, .87);
           display: inline-block;
           font-size: 16px;
