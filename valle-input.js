@@ -127,7 +127,7 @@ class ValleInput extends PolymerElement {
         }
 
         .input {
-          border: 1px solid rgba(0, 0, 0, .87);
+          border: 2px solid rgba(0, 0, 0, .87);
           color: rgba(0, 0, 0, .87);
           display: inline-block;
           font-size: 16px;
@@ -142,7 +142,7 @@ class ValleInput extends PolymerElement {
         }
 
         .input:focus {
-          border: 2px solid var(--valle-input-color, rgb(5, 159, 183));
+          border-color: var(--valle-input-color, rgb(5, 159, 183));
         }
 
         .input::placeholder {
@@ -153,7 +153,7 @@ class ValleInput extends PolymerElement {
           pointer-events: none;
           color: rgba(0, 0, 0, .54);
           display: block;
-          left: 13px;
+          left: 14px;
           position: absolute;
           top: 21px;
           transition: all .1s linear;
