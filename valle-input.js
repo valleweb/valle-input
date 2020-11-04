@@ -127,38 +127,48 @@ class ValleInput extends PolymerElement {
         }
 
         .input {
-          border: 0;
-          border-bottom: 2px solid rgba(0, 0, 0, .87);
+          border: 1px solid rgba(0, 0, 0, .87);
           color: rgba(0, 0, 0, .87);
-          display: block;
+          display: inline-block;
           font-size: 16px;
           margin-top: 29px;
           outline: 0;
-          padding: 8px 0;
+          padding: 16px 12px 16px 16px;
           width: 100%;
-          height: 32px;
+          border-radius: 4px;
+          box-sizing: border-box;
+          vertical-align: middle;
+          transition: all .1s linear;
         }
 
         .input:focus {
-          border-color: var(--valle-input-color, rgb(5, 159, 183));
+          border: 2px solid var(--valle-input-color, rgb(5, 159, 183));
+        }
+
+        .input::placeholder {
+          color: rgba(0, 0, 0, .54);
         }
 
         .label {
+          pointer-events: none;
           color: rgba(0, 0, 0, .54);
           display: block;
-          font-size: 12px;
-          left: 0;
-          padding-top: 16px;
+          left: 16px;
           position: absolute;
-          top: 0;
+          top: 21px;
+          transition: all .1s linear;
+          box-sizing: border-box;
+          background-color: #fff;
+          font-size: 12px;
+          padding: 0 4px;
+        }
+
+        .input:focus ~ .label {
+          color: var(--valle-input-color, rgba(5, 159, 183, .87));
         }
 
         .tooltip ~ .label {
           padding-right: 22px; /* Adjust for break line with helper icon */
-        }
-
-        .input:focus + .label {
-          color: var(--valle-input-color, rgba(5, 159, 183, .87));
         }
 
         .description {
@@ -166,6 +176,7 @@ class ValleInput extends PolymerElement {
           display: block;
           font-size: 12px;
           padding-top: 8px;
+          margin-left: 16px;
         }
 
         :host([error]) .description,
@@ -175,7 +186,7 @@ class ValleInput extends PolymerElement {
         }
 
         :host([error]) .input {
-          border-color: rgb(255, 0, 0);
+          border: 2px solid rgb(255, 0, 0);
         }
 
         :host([disabled]) .input {
@@ -211,8 +222,8 @@ class ValleInput extends PolymerElement {
           height: 24px;
           position: absolute;
           cursor: help;
-          top: 11px;
-          right: 0;
+          top: 30px;
+          right: 1px;
           border-radius: 3px;
           transition: background .3s;
           display: flex;
@@ -375,8 +386,6 @@ class ValleInput extends PolymerElement {
         </span>
       </template>
 
-      <label id="inputLabel" class="label">[[label]]</label>
-
       <template is="dom-if" if={{_isNoError(helpertext,error)}}>
         <small id="description" class="description">[[helpertext]]</small>
       </template>
@@ -386,6 +395,8 @@ class ValleInput extends PolymerElement {
           [[errortext]]<small class="visual-hidden">: [[helpertext]]</small>
         </span>
       </template>
+
+      <label id="inputLabel" class="label">[[label]]</label>
     `;
   };
 
