@@ -141,12 +141,12 @@ class ValleInput extends PolymerElement {
           transition: all .1s linear;
         }
 
-        .input:focus {
-          border-color: var(--valle-input-color, rgb(5, 159, 183));
-        }
-
         .input:hover {
           border-color: #000;
+        }
+
+        .input:focus {
+          border-color: var(--valle-input-color, rgb(5, 159, 183));
         }
 
         .input::placeholder {
