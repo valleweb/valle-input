@@ -153,7 +153,7 @@ class ValleInput extends PolymerElement {
           pointer-events: none;
           color: rgba(0, 0, 0, .54);
           display: block;
-          left: 16px;
+          left: 13px;
           position: absolute;
           top: 21px;
           transition: all .1s linear;
