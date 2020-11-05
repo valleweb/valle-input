@@ -179,6 +179,11 @@ class ValleInput extends PolymerElement {
           margin-left: 16px;
         }
 
+        :host([type="date"]) .input {
+          font-family: 'Roboto', 'Noto', sans-serif;
+          padding: 13.41px 12px 13.41px 16px;
+        }
+
         :host([error]) .description,
         :host([error]) .label,
         :host([error]) .input:focus + .label {
