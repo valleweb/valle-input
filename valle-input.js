@@ -201,18 +201,6 @@ class ValleInput extends PolymerElement {
           cursor: no-drop;
         }
 
-        :host([uppercase]) .input {
-          text-transform: uppercase;
-        }
-
-        :host([lowercase]) .input {
-          text-transform: lowercase;
-        }
-
-        :host([capitalize]) .input {
-          text-transform: capitalize;
-        }
-
         :host([disabled]) .label {
           color: rgba(0, 0, 0, .38);
         }
@@ -408,8 +396,6 @@ class ValleInput extends PolymerElement {
   ready() {
     super.ready();
 
-    this.addEventListener('input', this._bindValue.bind(this));
-
     if (this.required) {
       this.addEventListener('blur', this._validateRequired.bind(this));
     };
@@ -457,9 +443,27 @@ class ValleInput extends PolymerElement {
       this.addEventListener('blur', () => this._validateMinlength(this.minlength));
     };
 
-    if (this.propercase) {
-      this.addEventListener('keyup', () => this._mask(this._properCaseControl.bind(this)));
+    if (this.uppercase) {
+      this.addEventListener('input', () => this._mask(this._upperCaseControl.bind(this)));
     };
+
+    if (this.lowercase) {
+      this.addEventListener('input', () => this._mask(this._lowerCaseControl.bind(this)));
+    };
+
+    if (this.propercase || this.capitalize) {
+      this.addEventListener('input', () => this._mask(this._properCaseControl.bind(this)));
+    };
+
+    this.addEventListener('input', this._bindValue.bind(this));
+  };
+
+  _upperCaseControl(value) {
+    return value.toUpperCase();
+  };
+
+  _lowerCaseControl(value) {
+    return value.toLowerCase();
   };
 
   _toCapitalize(str) {
@@ -473,9 +477,15 @@ class ValleInput extends PolymerElement {
     const newListOfWords = listOfWords.map( word => {
       const wordLowerCase = word.toLowerCase();
 
-      return prepositions.includes(wordLowerCase)
-        ? wordLowerCase
-        : this._toCapitalize(wordLowerCase);
+      if (this.propercase) {
+        return prepositions.includes(wordLowerCase)
+          ? wordLowerCase
+          : this._toCapitalize(wordLowerCase);
+      };
+
+      if (this.capitalize) {
+        return this._toCapitalize(wordLowerCase);
+      };
     });
 
     const newPhrase = newListOfWords.join(' ');
@@ -586,6 +596,6 @@ class ValleInput extends PolymerElement {
       ? this.setAttribute('error', true)
       : this.removeAttribute('error');
   };
-}
+};
 
 window.customElements.define('valle-input', ValleInput);
