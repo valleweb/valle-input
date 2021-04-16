@@ -103,6 +103,8 @@ class ValleInput extends PolymerElement {
       tooltip: String,
       tooltippos: String,
       tooltiplength: String,
+      min: Number,
+      max: Number,
     };
   };
 
@@ -139,6 +141,18 @@ class ValleInput extends PolymerElement {
           box-sizing: border-box;
           vertical-align: middle;
           transition: all .1s linear;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
         }
 
         .input:hover {
@@ -368,6 +382,8 @@ class ValleInput extends PolymerElement {
         maxlength=[[maxlength]]
         minlength=[[minlength]]
         autocomplete=[[autocomplete]]
+        min=[[min]]
+        max=[[max]]
       >
 
       <template is="dom-if" if=[[tooltip]]>
