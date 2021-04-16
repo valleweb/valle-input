@@ -141,6 +141,7 @@ class ValleInput extends PolymerElement {
           box-sizing: border-box;
           vertical-align: middle;
           transition: all .1s linear;
+          height: 54px;
         }
 
         /* Chrome, Safari, Edge, Opera */
