@@ -414,6 +414,10 @@ class ValleInput extends PolymerElement {
   ready() {
     super.ready();
 
+    if (this.mask) {
+      this.addEventListener('blur', this._custom_mask.bind(this));
+    };
+    
     if (this.required) {
       this.addEventListener('blur', this._validateRequired.bind(this));
     };
@@ -471,10 +475,6 @@ class ValleInput extends PolymerElement {
 
     if (this.propercase || this.capitalize) {
       this.addEventListener('input', () => this._mask(this._properCaseControl.bind(this)));
-    };
-
-    if (this.mask) {
-      this.addEventListener('blur', this._custom_mask.bind(this));
     };
 
     this.addEventListener('input', this._bindValue.bind(this));
@@ -537,7 +537,6 @@ class ValleInput extends PolymerElement {
       return String(data).replace(new RegExp(regex), pattern);
   
     } 
-    
     
     if (pattern[0] === '#') {
 
