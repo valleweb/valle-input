@@ -536,7 +536,7 @@ class ValleInput extends PolymerElement {
   
       return String(data).replace(new RegExp(regex), pattern);
   
-    } 
+    }
     
     if (pattern[0] === '#') {
 
@@ -544,7 +544,7 @@ class ValleInput extends PolymerElement {
         console.log('not found .')
 
         if(pattern.indexOf('.')) {
-          data = String(data).split('.')[0]
+          data = String(data).split(',')[0]
         }
 
         return String(data).replace(/(.)(?=(\d{3})+$)/g,'$1.');
@@ -553,7 +553,7 @@ class ValleInput extends PolymerElement {
       // (patter) total digits after .
       const patternDeciamls = pattern.split('.')[1].length;
   
-      const dataDigits = String(data).split('.');
+      const dataDigits = String(data).split(',');
   
       let newValue = '';
      
