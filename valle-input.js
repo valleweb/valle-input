@@ -547,7 +547,7 @@ class ValleInput extends PolymerElement {
           data = String(data).split('.')[0]
         }
 
-        return String(data).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+        return String(data).replace(/(.)(?=(\d{3})+$)/g,'$1.');
       }
 
       // (patter) total digits after .
@@ -560,7 +560,7 @@ class ValleInput extends PolymerElement {
       // (data) verify and get numbers before .
   
       if(dataDigits[0]) {
-        newValue = String(dataDigits[0]).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+        newValue = String(dataDigits[0]).replace(/(.)(?=(\d{3})+$)/g,'$1.');
       } else {
         newValue = '0';
       }
@@ -569,7 +569,7 @@ class ValleInput extends PolymerElement {
   
       if(dataDigits[1]) {
   
-        newValue = newValue + '.' + dataDigits[1].substr(0, patternDeciamls);
+        newValue = newValue + ',' + dataDigits[1].substr(0, patternDeciamls);
   
         if(dataDigits[1].length < patternDeciamls) {
   
@@ -582,7 +582,7 @@ class ValleInput extends PolymerElement {
         }
   
       } else {
-        newValue = newValue + '.' + pattern.split('.')[1];
+        newValue = newValue + ',' + pattern.split('.')[1];
       }
   
       return newValue;
