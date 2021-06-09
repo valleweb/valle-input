@@ -311,7 +311,7 @@ class ValleInput extends PolymerElement {
           transform: translate(0, 0);
         }
 
-        :host([tooltippos^="top"]) .tooltip::before, 
+        :host([tooltippos^="top"]) .tooltip::before,
         :host([tooltippos^="top"]) .tooltip::after {
           bottom: 100%;
           transform-origin: top;
@@ -416,8 +416,9 @@ class ValleInput extends PolymerElement {
 
     if (this.mask) {
       this.addEventListener('blur', this._custom_mask.bind(this));
+      this.addEventListener('focus', this._remove_custom_mask.bind(this));
     };
-    
+
     if (this.required) {
       this.addEventListener('blur', this._validateRequired.bind(this));
     };
@@ -516,6 +517,32 @@ class ValleInput extends PolymerElement {
     return this._toCapitalize(newPhrase);
   };
 
+  _remove_custom_mask(type) {
+
+    const pattern = this.mask;
+    let data = this.$.input.value;
+
+    // integer
+
+    if (pattern[0] === '#') {
+      if (pattern.indexOf('.') === -1) {
+
+        if(pattern.indexOf('.')) {
+          data = String(data).split(',')[0]
+        }
+
+        this.$.input.value = String(data).replace(/\./g, "")
+      } else {
+
+        // float
+
+        this.$.input.value = String(data).replace(/\./g, "")
+      }
+
+
+    }
+  }
+
   _custom_mask(type) {
     console.log(this.$.input.value)
     this.$.input.value = this._patternFormater(this.mask, this.$.input.value);
@@ -524,20 +551,20 @@ class ValleInput extends PolymerElement {
   _patternFormater(pattern, data) {
 
     if (pattern[0] === 'X') {
-  
+
       let regex = '';
-    
+
       for(var i = 1; pattern.indexOf('X') >= 0; ++i) {
           pattern = pattern.replace('X', '$'+i);
           regex += '(\\d)';
       }
-    
+
       regex += '[^]*';
-  
+
       return String(data).replace(new RegExp(regex), pattern);
-  
+
     }
-    
+
     if (pattern[0] === '#') {
 
       if (pattern.indexOf('.') === -1) {
@@ -552,44 +579,44 @@ class ValleInput extends PolymerElement {
 
       // (patter) total digits after .
       const patternDeciamls = pattern.split('.')[1].length;
-  
+
       const dataDigits = String(data).split(',');
-  
+
       let newValue = '';
-     
+
       // (data) verify and get numbers before .
-  
+
       if(dataDigits[0]) {
         newValue = String(dataDigits[0]).replace(/(.)(?=(\d{3})+$)/g,'$1.');
       } else {
         newValue = '0';
       }
-  
+
       // (data) Verify and get digits after .
-  
+
       if(dataDigits[1]) {
-  
+
         newValue = newValue + ',' + dataDigits[1].substr(0, patternDeciamls);
-  
+
         if(dataDigits[1].length < patternDeciamls) {
-  
+
           const total = patternDeciamls - dataDigits[1].length;
-  
+
           for (let index = 0; index < total; index++) {
             newValue = newValue + '0'
-            
+
           }
         }
-  
+
       } else {
         newValue = newValue + ',' + pattern.split('.')[1];
       }
-  
+
       return newValue;
-    
+
     }
-  
-  
+
+
   }
 
   _mask(type) {
