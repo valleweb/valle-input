@@ -145,6 +145,10 @@ class ValleInput extends PolymerElement {
           height: 54px;
         }
 
+        .input__number {
+          text-align: right;
+        }
+
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -415,6 +419,11 @@ class ValleInput extends PolymerElement {
     super.ready();
 
     if (this.mask) {
+
+      if(this.mask[0] === '#') {
+        this.$.input.classList.add('input__number')
+      }
+
       this.addEventListener('blur', this._custom_mask.bind(this));
       this.addEventListener('focus', this._remove_custom_mask.bind(this));
     };
