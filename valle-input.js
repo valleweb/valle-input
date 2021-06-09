@@ -724,12 +724,15 @@ class ValleInput extends PolymerElement {
   _validate(pattern) {
     const valueInput = this.$.input.value;
 
-    const regExp = new RegExp(pattern);
-    const result = regExp.test(valueInput);
+    if(this.$.input.value !== '') {
+      const regExp = new RegExp(pattern);
+      const result = regExp.test(valueInput);
 
-    !result
-      ? this.setAttribute('error', true)
-      : this.removeAttribute('error');
+      !result
+        ? this.setAttribute('error', true)
+        : this.removeAttribute('error');
+    }
+
   };
 };
 
