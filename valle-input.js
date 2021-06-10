@@ -79,6 +79,10 @@ class ValleInput extends PolymerElement {
         type: Boolean,
         value: false
       },
+      cpf_cnpj: {
+        type: Boolean,
+        value: false
+      },
       cep: {
         type: Boolean,
         value: false
@@ -420,9 +424,9 @@ class ValleInput extends PolymerElement {
 
     if (this.mask) {
 
-      if(this.mask[0] === '#') {
-        this.$.input.classList.add('input__number')
-      }
+      if (this.mask[0] === '#') {
+        this.$.input.classList.add('input__number');
+      };
 
       this.addEventListener('blur', this._custom_mask.bind(this));
       this.addEventListener('focus', this._remove_custom_mask.bind(this));
@@ -436,6 +440,17 @@ class ValleInput extends PolymerElement {
       this.addEventListener('blur', () => this._validate(this.pattern));
     } else if (this.validateby === 'name') {
       this.addEventListener('blur', () => this._validate('[A-z][ ][A-z]'));
+    };
+
+    if (this.cpf_cnpj) {
+      this.addEventListener('input', () => {
+        if (this.$.input.value.length <= 14) {
+          this.addEventListener('input', () => this._mask(this._maskCpf));
+        } else if (this.$.input.value.length > 14) {
+          this.maxlength = 18;
+          this.addEventListener('input', () => this._mask(this._maskCnpj));
+        };
+      });
     };
 
     if (this.cpf) {
