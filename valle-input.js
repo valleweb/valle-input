@@ -510,11 +510,11 @@ class ValleInput extends PolymerElement {
       this.addEventListener('input', () => this._mask(this._properCaseControl.bind(this)));
     };
 
-    if (this.type === 'number_float') {
+    if (this.number_float) {
       this.addEventListener('input', () => this._mask(this._maskNumberFloat));
     }
 
-    if (this.type === 'number_integer') {
+    if (this.number_integer) {
       this.addEventListener('input', () => this._mask(this._maskNumberInteger));
     }
 
