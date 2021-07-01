@@ -83,6 +83,14 @@ class ValleInput extends PolymerElement {
         type: Boolean,
         value: false
       },
+      number_float: {
+        type: Boolean,
+        value: false
+      },
+      number_integer: {
+        type: Boolean,
+        value: false
+      },
       cep: {
         type: Boolean,
         value: false
@@ -502,6 +510,14 @@ class ValleInput extends PolymerElement {
       this.addEventListener('input', () => this._mask(this._properCaseControl.bind(this)));
     };
 
+    if (this.type === 'number_float') {
+      this.addEventListener('input', () => this._mask(this._maskNumberFloat));
+    }
+
+    if (this.type === 'number_integer') {
+      this.addEventListener('input', () => this._mask(this._maskNumberInteger));
+    }
+
     this.addEventListener('input', this._bindValue.bind(this));
 
   };
@@ -665,6 +681,16 @@ class ValleInput extends PolymerElement {
     value=value.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3");
     value=value.replace(/\.(\d{3})(\d)/,".$1/$2");
     value=value.replace(/(\d{4})(\d)/,"$1-$2");
+    return value;
+  };
+
+  _maskNumberFloat(value) {
+    value=value.replace(/[^\d,]+/g, '');
+    return value;
+  };
+
+  _maskNumberInteger(value) {
+    value=value.replace(/[^\d]+/g, '');
     return value;
   };
 
