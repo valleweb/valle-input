@@ -40,11 +40,27 @@
         </template>
       </demo-snippet>
 
-      <!-- Label -->
-      <h3>Mask</h3>
+      <!-- X Mask -->
+      <h3>Float mask</h3>
       <demo-snippet>
         <template>
-          <valle-input label="Value" pattern = "(^\d{3}\.\d{3}\\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)" mask="XX.XXX.XXX/XXXX-XX" required></valle-input>
+          <valle-input label="Value" number_float mask="#,##0.00"></valle-input>
+        </template>
+      </demo-snippet>
+
+      <!-- X Mask -->
+      <h3>Integer mask</h3>
+      <demo-snippet>
+        <template>
+          <valle-input label="Value" number_integer mask="#,#00"></valle-input>
+        </template>
+      </demo-snippet>
+
+      <!-- X mask -->
+      <h3>X mask</h3>
+      <demo-snippet>
+        <template>
+          <valle-input label="Value" mask="XX.XXX.XXX/XXXX-XX"></valle-input>
         </template>
       </demo-snippet>
 
@@ -199,7 +215,7 @@
           <valle-input label="Number integer" number_integer></valle-input>
         </template>
       </demo-snippet>
-      
+
       <!-- CPF/CNPJ -->
       <h3>CPF/CNPJ</h3>
       <demo-snippet>
